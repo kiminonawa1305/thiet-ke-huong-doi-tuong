@@ -1,10 +1,36 @@
 package model_beverage;
 
-public class Soda implements Beverage {
+import model_system.Size;
 
-	public double cost() {
-		// TODO - implement Soda.cost
-		throw new UnsupportedOperationException();
+public class Soda implements Beverage {
+	private Size size;
+	private String name;
+	
+	
+	public Soda(Size size) {
+		super();
+		this.size = size;
+		name = "Soda size " + size.toString();
 	}
 
+	public double cost() {
+		return 10000*size.getPercent();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	@Override
+	public String note() {
+		return name;
+	}
 }

@@ -1,10 +1,17 @@
 package model_beverage;
 
 public class Sugar extends CondimentDecorator {
-
-	public double cost() {
-		// TODO - implement Sugar.cost
-		throw new UnsupportedOperationException();
+	
+	public Sugar(Beverage beverage) {
+		super(beverage);
 	}
 
+	public double cost() {
+		return 1000 + beverage.cost();
+	}
+
+	@Override
+	public String note() {
+		return beverage.note() + " thêm đường,";
+	}
 }

@@ -1,10 +1,17 @@
 package model_food;
 
 public class Cheese extends FoodDecorator {
+	public Cheese(Food food) {
+		super(food);
+	}
 
 	public double cost() {
-		// TODO - implement Cheese.cost
-		throw new UnsupportedOperationException();
+		return 2000 + food.cost();
+	}
+
+	@Override
+	public String note() {
+		return food.note() + " thêm phô mai,";
 	}
 
 }

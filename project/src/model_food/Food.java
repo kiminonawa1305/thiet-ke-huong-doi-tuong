@@ -1,7 +1,7 @@
 package model_food;
 
 public interface Food {
-
-	double cost();
-
+	public double cost();
+	
+	public String note();
 }

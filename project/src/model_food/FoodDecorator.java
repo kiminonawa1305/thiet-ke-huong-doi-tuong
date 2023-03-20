@@ -1,10 +1,12 @@
 package model_food;
 
 public abstract class FoodDecorator implements Food {
-
-	public double cost() {
-		// TODO - implement FoodDecorator.cost
-		throw new UnsupportedOperationException();
+	protected Food food;
+	
+	public FoodDecorator(Food food) {
+		super();
+		this.food = food;
 	}
 
+	public abstract double cost();
 }

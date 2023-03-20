@@ -1,10 +1,20 @@
 package model_food;
 
-public class BanhMi {
+public class BanhMi implements Food{
+	private String name;
+	
+	public BanhMi() {
+		super();
+		this.name = "Bánh mì";
+	}
 
 	public double cost() {
-		// TODO - implement BanhMi.cost
-		throw new UnsupportedOperationException();
+		return 10000;
+	}
+
+	@Override
+	public String note() {
+		return name;
 	}
 
 }
