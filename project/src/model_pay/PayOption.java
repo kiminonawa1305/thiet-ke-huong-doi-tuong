@@ -9,6 +9,6 @@ public interface PayOption {
 	 * @param bill
 	 * @param moneyReceived
 	 */
-	boolean getPay(Bill bill, int moneyReceived);
+	boolean getPay(Bill bill, double moneyReceived);
 
 }

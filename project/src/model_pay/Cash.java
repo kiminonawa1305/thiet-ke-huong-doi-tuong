@@ -5,7 +5,7 @@ import model_system.Bill;
 public class Cash implements PayOption {
 
 	@Override
-	public boolean getPay(Bill bill, int moneyReceived) {
+	public boolean getPay(Bill bill, double moneyReceived) {
 		// TODO Auto-generated method stub
 		return false;
 	}
