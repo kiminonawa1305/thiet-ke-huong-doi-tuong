@@ -4,7 +4,7 @@ package model_food;
 public class Barbecue extends FoodDecorator {
 
 	public Barbecue(Food food) {
-		super(food);
+		this.food = food;
 	}
 
 	public double cost() {
@@ -14,6 +14,11 @@ public class Barbecue extends FoodDecorator {
 	@Override
 	public String note() {
 		return food.note() + " thêm thịt nướng,";
+	}
+
+	@Override
+	public String getName() {
+		return "Thịt nướng";
 	}
 
 }

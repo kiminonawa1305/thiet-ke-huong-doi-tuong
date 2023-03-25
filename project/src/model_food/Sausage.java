@@ -3,7 +3,7 @@ package model_food;
 //Xúc xích
 public class Sausage extends FoodDecorator {
 	public Sausage(Food food) {
-		super(food);
+		this.food = food;
 	}
 
 	public double cost() {
@@ -13,6 +13,11 @@ public class Sausage extends FoodDecorator {
 	@Override
 	public String note() {
 		return food.note() + " thêm xúc xích,";
+	}
+
+	@Override
+	public String getName() {
+		return "Xúc xích";
 	}
 
 }

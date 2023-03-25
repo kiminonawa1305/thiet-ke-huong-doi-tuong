@@ -28,6 +28,10 @@ public class ControlPanelMenuSanPham implements ActionListener {
 		if (button.equals(panelMenu.getButtonOptionDoUong())) {
 			panelMenu.showMenuDoUong();
 		}
+		
+		if(button.getName().equals("chon")) {
+			panelMenu.chonDoAn(button);
+		}
 	}
 
 }

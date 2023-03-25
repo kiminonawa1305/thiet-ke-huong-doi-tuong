@@ -52,7 +52,6 @@ public class PanelQLNV extends JPanel {
 	private JComboBox<String> comboBoxGioiTinh;
 	private List<Employee> listEmployees;
 	private String pass;
-	private JButton buttonDangNhap;
 	private JScrollPane scrollPane;
 	private JPanel that;
 
@@ -91,26 +90,28 @@ public class PanelQLNV extends JPanel {
 		control = new ControlPanelQLNV(this);
 
 		JPanel panelPassword = new JPanel();
+		panelPassword.setAlignmentX(140.0f);
+		panelPassword.setAlignmentY(140.0f);
+		panelPassword.setBackground(Color.WHITE);
+		panelPassword.setPreferredSize(new Dimension(400, 400));
 		this.add("pass", panelPassword);
-		SpringLayout sl_panelPassword = new SpringLayout();
-		panelPassword.setLayout(sl_panelPassword);
+		panelPassword.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		JPanel panel_1 = new JPanel(new BorderLayout());
+		panel_1.setOpaque(false);
+		panel_1.setPreferredSize(new Dimension(1500, 400));
+		panelPassword.add(panel_1);
 
 		JLabel labelPass = new JLabel("Nhập mật khẩu");
-		sl_panelPassword.putConstraint(SpringLayout.NORTH, labelPass, 248, SpringLayout.NORTH, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.WEST, labelPass, -933, SpringLayout.EAST, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.SOUTH, labelPass, 358, SpringLayout.NORTH, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.EAST, labelPass, -453, SpringLayout.EAST, panelPassword);
+		panel_1.add(labelPass, BorderLayout.SOUTH);
+		labelPass.setAlignmentY(0.0f);
+		labelPass.setPreferredSize(new Dimension(1400, 50));
 		labelPass.setHorizontalTextPosition(SwingConstants.CENTER);
 		labelPass.setHorizontalAlignment(SwingConstants.CENTER);
 		labelPass.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		panelPassword.add(labelPass);
 
 		panelPasswordField = new JPanel(new BorderLayout(0, 0));
 		panelPasswordField.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		sl_panelPassword.putConstraint(SpringLayout.NORTH, panelPasswordField, 6, SpringLayout.SOUTH, labelPass);
-		sl_panelPassword.putConstraint(SpringLayout.WEST, panelPasswordField, 532, SpringLayout.WEST, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.SOUTH, panelPasswordField, 166, SpringLayout.NORTH, labelPass);
-		sl_panelPassword.putConstraint(SpringLayout.EAST, panelPasswordField, -346, SpringLayout.EAST, panelPassword);
 		panelPassword.add(panelPasswordField);
 
 		passwordField = new JPasswordField();
@@ -119,20 +120,21 @@ public class PanelQLNV extends JPanel {
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelPasswordField.add(passwordField, BorderLayout.WEST);
 
-		buttonDangNhap = new JButton("Đăng Nhập");
-		sl_panelPassword.putConstraint(SpringLayout.NORTH, buttonDangNhap, 17, SpringLayout.SOUTH, panelPasswordField);
-		sl_panelPassword.putConstraint(SpringLayout.WEST, buttonDangNhap, -835, SpringLayout.EAST, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.SOUTH, buttonDangNhap, -404, SpringLayout.SOUTH, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.EAST, buttonDangNhap, -546, SpringLayout.EAST, panelPassword);
-
 		buttonEye = new JButton("M");
 		buttonEye.setHorizontalTextPosition(SwingConstants.CENTER);
 		buttonEye.setHorizontalAlignment(SwingConstants.CENTER);
 		buttonEye.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonEye.setPreferredSize(new Dimension(50, 50));
 		panelPasswordField.add(buttonEye, BorderLayout.EAST);
+
+		JPanel panel = new JPanel();
+		panel.setOpaque(false);
+		panel.setPreferredSize(new Dimension(1400, 50));
+		panelPassword.add(panel);
+
+		JButton buttonDangNhap = new JButton("Đăng Nhập");
 		buttonDangNhap.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		panelPassword.add(buttonDangNhap);
+		panel.add(buttonDangNhap);
 
 		// Phân show
 		JPanel panelShowQLNV = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 30));
@@ -346,7 +348,6 @@ public class PanelQLNV extends JPanel {
 
 	public void event() {
 		this.buttonEye.addActionListener(control);
-		this.buttonDangNhap.addActionListener(control);
 		passwordField.registerKeyboardAction(new ActionListener() {
 
 			@Override
@@ -391,7 +392,7 @@ public class PanelQLNV extends JPanel {
 
 	public void createListNV() {
 		panelShowListNV = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 10));
-		panelShowListNV.setPreferredSize(new Dimension(1400, listEmployees.size() * 50));
+		panelShowListNV.setPreferredSize(new Dimension(1400, listEmployees.size() * 60));
 		for (Employee employee : this.listEmployees) {
 			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 14, 0));
 			panel.setBackground(new Color(250, 241, 230));

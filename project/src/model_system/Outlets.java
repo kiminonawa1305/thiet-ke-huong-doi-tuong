@@ -21,6 +21,8 @@ public class Outlets extends Observable implements Observer {
 	private List<Employee> employees;
 	private List<Bill> listBill;
 	private List<Food> listFood;
+	private List<FoodDecorator> listToppingFood;
+	private List<CondimentDecorator> listToppingBeverage;
 	private List<Beverage> listBeverage;
 	private Object[] notify;
 
@@ -34,6 +36,8 @@ public class Outlets extends Observable implements Observer {
 		listBill = new ArrayList<>();
 		listFood = new ArrayList<>();
 		listBeverage = new ArrayList<>();
+		listToppingFood = new ArrayList<>();
+		listToppingBeverage = new ArrayList<>();
 	}
 
 	public List<Food> getListFood() {
@@ -54,6 +58,22 @@ public class Outlets extends Observable implements Observer {
 
 	public List<Bill> getListBill() {
 		return listBill;
+	}
+
+	public List<FoodDecorator> getListToppingFood() {
+		return listToppingFood;
+	}
+
+	public void setListToppingFood(List<FoodDecorator> listToppingFood) {
+		this.listToppingFood = listToppingFood;
+	}
+
+	public List<CondimentDecorator> getListToppingBeverage() {
+		return listToppingBeverage;
+	}
+
+	public void setListToppingBeverage(List<CondimentDecorator> listToppingBeverage) {
+		this.listToppingBeverage = listToppingBeverage;
 	}
 
 	public void setListBill(List<Bill> listBill) {
@@ -120,6 +140,18 @@ public class Outlets extends Observable implements Observer {
 			this.listBeverage = (List<Beverage>) src[1];
 		}
 	}
+	
+	public void addToppingBeverage(Object[] src) {
+		if (((String) src[0]).equals("Cap nhat topping do uong")) {
+			this.listToppingBeverage = (List<CondimentDecorator>) src[1];
+		}
+	}
+	
+	public void addToppingFood(Object[] src) {
+		if (((String) src[0]).equals("Cap nhat topping do an")) {
+			this.listToppingFood = (List<FoodDecorator>) src[1];
+		}
+	}
 
 	public void addEmployee(Employee employee) {
 		this.employees.add(employee);
@@ -141,5 +173,9 @@ public class Outlets extends Observable implements Observer {
 		Object[] src = (Object[]) arg;
 
 		getTotalTurnover(src);
+		addFood(src);
+		addBeverage(src);
+		addToppingBeverage(src);
+		addToppingFood(src);
 	}
 }

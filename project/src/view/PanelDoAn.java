@@ -17,6 +17,7 @@ import model_system.Size;
 
 public class PanelDoAn extends JPanel {
 	private Food food;
+	private JButton chon;
 
 	public PanelDoAn(Food food) {
 		this.food = food;
@@ -62,12 +63,14 @@ public class PanelDoAn extends JPanel {
 		image.setIcon(new ImageIcon(((Foods) food).getUrlImage()));
 		this.add(image, BorderLayout.NORTH);
 
-		JButton datHangCafe = new JButton("Đặt");
-		datHangCafe.setPreferredSize(new Dimension(100, 25));
-		this.add(datHangCafe, BorderLayout.EAST);
+		chon = new JButton("Chọn");
+		chon.setActionCommand(food.note());
+		chon.setName("chon");
+		chon.setPreferredSize(new Dimension(195, 25));
+		this.add(chon, BorderLayout.EAST);
+	}
 
-		JButton themToppingCafe = new JButton("Thêm");
-		themToppingCafe.setPreferredSize(new Dimension(100, 25));
-		this.add(themToppingCafe, BorderLayout.WEST);
+	public JButton getChon() {
+		return chon;
 	}
 }

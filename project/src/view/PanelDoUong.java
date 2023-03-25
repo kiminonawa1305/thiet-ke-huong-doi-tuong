@@ -60,7 +60,7 @@ public class PanelDoUong extends JPanel {
 		image.setIcon(new ImageIcon(((Beverages) beverage).getUrlImage()));
 		this.add(image, BorderLayout.NORTH);
 
-		JButton datHangCafe = new JButton("Đặt");
+		JButton datHangCafe = new JButton("Chọn");
 		datHangCafe.setPreferredSize(new Dimension(100, 25));
 		this.add(datHangCafe, BorderLayout.EAST);
 

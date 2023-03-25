@@ -26,9 +26,12 @@ import model_beverage.Beverage;
 import model_beverage.Soda;
 import model_food.Food;
 import model_food.FriedChicken;
+import model_food.OrderFood;
 import model_system.Date;
 import model_system.Employee;
 import model_system.Outlets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DesignViewOutlets extends JFrame {
 	private Outlets outlets;
@@ -44,8 +47,12 @@ public class DesignViewOutlets extends JFrame {
 	 */
 	public static void main(String[] args) {
 		List<Food> listFoods = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
-			listFoods.add(new FriedChicken(""));
+		for (int i = 1; i < 100; i++) {
+			if(i % 2 == 0) {
+				listFoods.add(new OrderFood("", "Tên món " + i, i*10000, true));
+			}else {
+				listFoods.add(new OrderFood("", "Tên món " + i, i*10000, false));
+			}
 		}
 
 		List<Beverage> listBeverages = new ArrayList<>();
@@ -100,9 +107,8 @@ public class DesignViewOutlets extends JFrame {
 	 * 
 	 */
 	public void init() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		setBounds(0, 0, 1740,
-				930);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(0, 0, 1740, 930);
 		contentPane = new JPanel(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setResizable(false);
@@ -174,7 +180,8 @@ public class DesignViewOutlets extends JFrame {
 		panelCenter.setBackground(new Color(228, 239, 231));
 		contentPane.add(panelCenter, BorderLayout.CENTER);
 
-		panelMenuSanPham = new PanelMenuSanPham(outlets.getListFood(), outlets.getListBeverage());
+		panelMenuSanPham = new PanelMenuSanPham(outlets.getListFood(), outlets.getListBeverage(),
+				outlets.getListToppingFood(), outlets.getListToppingBeverage());
 		panelCenter.add("menu_sp", panelMenuSanPham);
 
 		JPanel panelHoaDon = new JPanel();
@@ -227,6 +234,10 @@ public class DesignViewOutlets extends JFrame {
 				b.setBackground(new Color(180, 231, 191));
 			}
 		}
+	}
+
+	public void dac() {
+		new JFrame();
 	}
 
 }

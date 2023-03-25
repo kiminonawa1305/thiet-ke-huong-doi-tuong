@@ -16,6 +16,8 @@ import model_food.*;
 public class Systems extends Observable implements Observer {
 	private List<Beverage> listBeverage;
 	private List<Food> listFood;
+	private List<FoodDecorator> listToppingFood;
+	private List<CondimentDecorator> listToppingBeverage;
 	private Map<String, Double> listTurnover;
 	private Object[] notify;
 
@@ -31,6 +33,8 @@ public class Systems extends Observable implements Observer {
 		this.listBeverage = new ArrayList<>();
 		this.listFood = new ArrayList<>();
 		listTurnover = new HashMap<>();
+		this.listToppingBeverage = new ArrayList<>();
+		this.listToppingFood = new ArrayList<>();
 	}
 
 	public List<Beverage> getListBeverage() {
@@ -39,6 +43,14 @@ public class Systems extends Observable implements Observer {
 
 	public List<Food> getListFood() {
 		return listFood;
+	}
+	
+	public List<FoodDecorator> getListToppingFood() {
+		return listToppingFood;
+	}
+
+	public List<CondimentDecorator> getListToppingBeverage() {
+		return listToppingBeverage;
 	}
 
 	/**
@@ -91,6 +103,26 @@ public class Systems extends Observable implements Observer {
 		this.setChanged();
 		this.notifyObservers(notify);
 	}
+	
+	public void addToppingBeverage(CondimentDecorator CondimentDecorator) {
+		this.listToppingBeverage.add(CondimentDecorator);
+		notify = new Object[2];
+		notify[0] = "Cap nhat topping do uong";
+		notify[1] = this.listBeverage;
+
+		this.setChanged();
+		this.notifyObservers(notify);
+	}
+	
+	public void addToppingFood(FoodDecorator FoodDecorator) {
+		this.listToppingFood.add(FoodDecorator);
+		notify = new Object[2];
+		notify[0] = "Cap nhat topping do an";
+		notify[1] = this.listBeverage;
+
+		this.setChanged();
+		this.notifyObservers(notify);
+	}
 
 	public void deleteOutlets(Outlets outlets) {
 		this.deleteObserver(outlets);
@@ -98,6 +130,8 @@ public class Systems extends Observable implements Observer {
 		outlets.setListBeverage(new ArrayList<>());
 		outlets.setListFood(new ArrayList<>());
 		outlets.setListBill(new ArrayList<>());
+		outlets.setListToppingBeverage(new ArrayList<>());
+		outlets.setListToppingFood(new ArrayList<>());
 	}
 
 	public void addOutlets(Outlets outlets) {
@@ -105,5 +139,7 @@ public class Systems extends Observable implements Observer {
 		outlets.addObserver(this);
 		outlets.setListBeverage(listBeverage);
 		outlets.setListFood(listFood);
+		outlets.setListToppingBeverage(listToppingBeverage);
+		outlets.setListToppingFood(listToppingFood);
 	}
 }
