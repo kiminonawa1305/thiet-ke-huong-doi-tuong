@@ -33,6 +33,8 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -42,7 +44,7 @@ import javax.swing.SpringLayout;
 public class PanelQLNV extends JPanel {
 	private ControlPanelQLNV control;
 	private JTextField passwordField;
-	private JButton buttonEye;
+	private JButton buttonEye, buttonDangNhap;
 	private JPanel panelPasswordField, panelShowListNV;
 	private JTextField textFieldID, textFieldHoTen, textFieldNgaySinh, textFieldDiaChi, textFieldSDT,
 			textFieldLuongCoBan, textFieldNgayBD, textFieldSearchName, textFieldSearchID, textFieldSearchSDT;
@@ -53,7 +55,10 @@ public class PanelQLNV extends JPanel {
 	private List<Employee> listEmployees;
 	private String pass;
 	private JScrollPane scrollPane;
-	private JPanel that;
+	private final Icon OPEN = new ImageIcon(
+			"icon\\open_eye_icon.png");
+	private final Icon CLOSE = new ImageIcon(
+			"icon\\eye_close_icon.png");
 
 	/**
 	 * Create the panel.
@@ -63,7 +68,6 @@ public class PanelQLNV extends JPanel {
 		this.listEmployees = listEmployees;
 		this.init();
 		this.event();
-//		this.add(that);
 	}
 
 	public JButton getButtonEyes() {
@@ -83,7 +87,6 @@ public class PanelQLNV extends JPanel {
 	}
 
 	public void init() {
-//		this = new JPanel();
 		this.setLayout(new CardLayout());
 		this.setBackground(new Color(228, 239, 231));
 
@@ -97,18 +100,12 @@ public class PanelQLNV extends JPanel {
 		this.add("pass", panelPassword);
 		panelPassword.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JPanel panel_1 = new JPanel(new BorderLayout());
-		panel_1.setOpaque(false);
-		panel_1.setPreferredSize(new Dimension(1500, 400));
-		panelPassword.add(panel_1);
-
 		JLabel labelPass = new JLabel("Nhập mật khẩu");
-		panel_1.add(labelPass, BorderLayout.SOUTH);
-		labelPass.setAlignmentY(0.0f);
-		labelPass.setPreferredSize(new Dimension(1400, 50));
-		labelPass.setHorizontalTextPosition(SwingConstants.CENTER);
+		labelPass.setPreferredSize(new Dimension(1400, 400));
+		labelPass.setVerticalAlignment(SwingConstants.BOTTOM);
 		labelPass.setHorizontalAlignment(SwingConstants.CENTER);
 		labelPass.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		panelPassword.add(labelPass);
 
 		panelPasswordField = new JPanel(new BorderLayout(0, 0));
 		panelPasswordField.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -120,10 +117,8 @@ public class PanelQLNV extends JPanel {
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelPasswordField.add(passwordField, BorderLayout.WEST);
 
-		buttonEye = new JButton("M");
-		buttonEye.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonEye.setHorizontalAlignment(SwingConstants.CENTER);
-		buttonEye.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttonEye = new JButton();
+		buttonEye.setIcon(CLOSE);
 		buttonEye.setPreferredSize(new Dimension(50, 50));
 		panelPasswordField.add(buttonEye, BorderLayout.EAST);
 
@@ -132,7 +127,7 @@ public class PanelQLNV extends JPanel {
 		panel.setPreferredSize(new Dimension(1400, 50));
 		panelPassword.add(panel);
 
-		JButton buttonDangNhap = new JButton("Đăng Nhập");
+		buttonDangNhap = new JButton("Đăng Nhập");
 		buttonDangNhap.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		panel.add(buttonDangNhap);
 
@@ -377,6 +372,15 @@ public class PanelQLNV extends JPanel {
 		passwordField.setPreferredSize(new Dimension(595, 19));
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelPasswordField.add(passwordField, BorderLayout.WEST);
+		buttonEye.setIcon(OPEN);
+		passwordField.registerKeyboardAction(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dangNhap();
+
+			}
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		this.validate();
 	}
 
@@ -387,6 +391,15 @@ public class PanelQLNV extends JPanel {
 		passwordField.setPreferredSize(new Dimension(595, 19));
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelPasswordField.add(passwordField, BorderLayout.WEST);
+		buttonEye.setIcon(CLOSE);
+		passwordField.registerKeyboardAction(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dangNhap();
+
+			}
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		this.validate();
 	}
 
