@@ -1,10 +1,10 @@
 package model_food;
 
-public class BanhMi implements Food{
+public class BanhMi extends Foods{
 	private String name;
 	
-	public BanhMi() {
-		super();
+	public BanhMi(String url) {
+		this.urlImage = url;
 		this.name = "Bánh mì";
 	}
 
@@ -17,4 +17,14 @@ public class BanhMi implements Food{
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return this.note();
+	}
+
+	@Override
+	public boolean hasSize() {
+		return false;
+	}
+	
 }

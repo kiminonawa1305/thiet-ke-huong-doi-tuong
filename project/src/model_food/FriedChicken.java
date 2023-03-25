@@ -2,13 +2,24 @@ package model_food;
 
 import model_system.Size;
 
-public class FriedChicken implements Food {
+public class FriedChicken extends Foods {
+	private String urlImage;
 	private Size size;
 	private String name;
 
-	public FriedChicken(Size size) {
-		this.size = size;
+	public FriedChicken(String url) {
 		name = "Gà rán";
+		size = Size.MEDIUM;
+		this.urlImage = url;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+		name += size.toString();
 	}
 
 	public double cost() {
@@ -20,4 +31,13 @@ public class FriedChicken implements Food {
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return this.note();
+	}
+
+	@Override
+	public boolean hasSize() {
+		return true;
+	}
 }

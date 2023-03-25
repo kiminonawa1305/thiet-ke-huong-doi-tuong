@@ -1,6 +1,8 @@
 package model_system;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +17,19 @@ public class Systems extends Observable implements Observer {
 	private List<Beverage> listBeverage;
 	private List<Food> listFood;
 	private Map<String, Double> listTurnover;
+	private Object[] notify;
 
 	public Systems(List<Beverage> listBeverage, List<Food> listFood) {
 		super();
 		this.listBeverage = listBeverage;
 		this.listFood = listFood;
+		listTurnover = new HashMap<>();
+	}
+
+	public Systems() {
+		super();
+		this.listBeverage = new ArrayList<>();
+		this.listFood = new ArrayList<>();
 		listTurnover = new HashMap<>();
 	}
 
@@ -35,64 +45,65 @@ public class Systems extends Observable implements Observer {
 	 * 
 	 * @param id
 	 */
-	public void getTurnoverOfOutlets(String id) {
-		throw new UnsupportedOperationException();
+	public String getTurnoverOfOutlets(String id) {
+		this.getTotalTurnover();
+
+		return "Thu nhap " + id + " " + listTurnover.get("Thu nhap " + id);
 	}
 
 	public void getTotalTurnover() {
+		notify = new Object[1];
+		notify[0] = "Thu nhap";
+
 		this.setChanged();
-		this.notifyObservers("Thu nhap");
+		this.notifyObservers(notify);
+	}
+
+	public void addTurnover(Object[] src) {
+		if (((String) src[0]).equals("Thu nhap")) {
+			this.listTurnover.put(src[0] + " " + src[1], (Double) src[2]);
+		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (((String) arg).split("\t")[0].equals("Thu nhap")) {
-			this.listTurnover.put(((String) arg).split("\t")[0] + " " + ((String) arg).split("\t")[1],
-					Double.parseDouble(((String) arg).split("\t")[2]));
-		}
+		Object[] src = (Object[]) arg;
+
+		addTurnover(src);
 	}
 
-	public static void main(String[] args) {
-		Beverage cafe = new Caffe();
-		Beverage soda = new Soda(Size.LARGE);
-		Beverage milkTea = new MilkTea(Size.MEDIUM);
-		List<Beverage> listBeverage = new ArrayList<>();
-		listBeverage.add(cafe);
-		listBeverage.add(soda);
-		listBeverage.add(milkTea);
+	public void addFood(Food food) {
+		this.listFood.add(food);
+		notify = new Object[2];
+		notify[0] = "Cap nhat mon an";
+		notify[1] = this.listFood;
 
-		Food banhMi = new BanhMi();
-		Food pizza = new Pizza(Size.LARGE);
-		Food gaRan = new FriedChicken(Size.MEDIUM);
-		List<Food> listFood = new ArrayList<>();
-		listFood.add(banhMi);
-		listFood.add(pizza);
-		listFood.add(gaRan);
+		this.setChanged();
+		this.notifyObservers(notify);
+	}
 
-		Systems system = new Systems(listBeverage, listFood);
-		Outlets outlets1 = new Outlets(system);
-		Outlets outlets2 = new Outlets(system);
-		Outlets outlets3 = new Outlets(system);
-		Outlets outlets4 = new Outlets(system);
+	public void addBeverage(Beverage beverage) {
+		this.listBeverage.add(beverage);
+		notify = new Object[2];
+		notify[0] = "Cap nhat do uong";
+		notify[1] = this.listBeverage;
 
-		System.out.println(outlets1.getListFood());
-		System.out.println(outlets2.getListFood());
-		System.out.println(outlets3.getListFood());
-		System.out.println(outlets4.getListFood());
+		this.setChanged();
+		this.notifyObservers(notify);
+	}
 
-		system.getTotalTurnover();
-		System.out.println(system.listTurnover);
+	public void deleteOutlets(Outlets outlets) {
+		this.deleteObserver(outlets);
+		outlets.deleteObserver(this);
+		outlets.setListBeverage(new ArrayList<>());
+		outlets.setListFood(new ArrayList<>());
+		outlets.setListBill(new ArrayList<>());
+	}
 
-		HashMap<Food, Integer> listFood1 = new HashMap<>();
-		listFood1.put(gaRan, 1);
-
-		HashMap<Beverage, Integer> listBeverage1 = new HashMap<>();
-
-		System.out.println(outlets1.getTotalTurnover());
-		outlets1.order(listFood1, listBeverage1);
-		System.out.println(outlets1.getTotalTurnover());
-
-		system.getTotalTurnover();
-		System.out.println(system.listTurnover);
+	public void addOutlets(Outlets outlets) {
+		this.addObserver(outlets);
+		outlets.addObserver(this);
+		outlets.setListBeverage(listBeverage);
+		outlets.setListFood(listFood);
 	}
 }

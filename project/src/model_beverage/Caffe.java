@@ -1,10 +1,10 @@
 package model_beverage;
 
-public class Caffe implements Beverage {
+public class Caffe extends Beverages {
 	private String name;
 	
-	public Caffe() {
-		super();
+	public Caffe(String url) {
+		this.urlImage = url;
 		this.name = "Caffe";
 	}
 
@@ -23,5 +23,10 @@ public class Caffe implements Beverage {
 	@Override
 	public String note() {
 		return name;
+	}
+	
+	@Override
+	public String toString() {
+		return this.note();
 	}
 }

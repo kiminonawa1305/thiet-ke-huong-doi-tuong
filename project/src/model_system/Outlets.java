@@ -16,42 +16,24 @@ import model_food.*;
 public class Outlets extends Observable implements Observer {
 	private static int countId = 1;
 	private String id = countId++ + "";
-	private String name;
-	private List<Employee> employees;
+	private String name, address, hotline, pass;
 	private Employee manager;
+	private List<Employee> employees;
 	private List<Bill> listBill;
 	private List<Food> listFood;
 	private List<Beverage> listBeverage;
+	private Object[] notify;
 
-	public Outlets(String id, String name, List<Employee> employees, Employee manager, List<Bill> listBill,
-			List<Food> listFood, List<Beverage> listBeverage, Observable observable) {
-		super();
-		this.id = id;
+	public Outlets(String name, String address, String hotline, String pass) {
 		this.name = name;
-		this.employees = employees;
-		this.manager = manager;
-		this.listBill = listBill;
-		this.listFood = listFood;
-		this.listBeverage = listBeverage;
-	}
+		this.address = address;
+		this.hotline = hotline;
+		this.pass = pass;
 
-	public Outlets(String id, String name, List<Bill> listBill, List<Food> listFood, List<Beverage> listBeverage,
-			Observable observable) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.listBill = listBill;
-		this.listFood = listFood;
-		this.listBeverage = listBeverage;
-	}
-
-	public Outlets(Systems systems) {
-		systems.addObserver(this);
-		this.addObserver(systems);
-
-		this.listBeverage = systems.getListBeverage();
-		this.listFood = systems.getListFood();
-		this.listBill = new ArrayList<>();
+		employees = new ArrayList<>();
+		listBill = new ArrayList<>();
+		listFood = new ArrayList<>();
+		listBeverage = new ArrayList<>();
 	}
 
 	public List<Food> getListFood() {
@@ -60,6 +42,38 @@ public class Outlets extends Observable implements Observer {
 
 	public List<Beverage> getListBeverage() {
 		return listBeverage;
+	}
+
+	public void setListFood(List<Food> listFood) {
+		this.listFood = listFood;
+	}
+
+	public void setListBeverage(List<Beverage> listBeverage) {
+		this.listBeverage = listBeverage;
+	}
+
+	public List<Bill> getListBill() {
+		return listBill;
+	}
+
+	public void setListBill(List<Bill> listBill) {
+		this.listBill = listBill;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	/**
@@ -78,19 +92,54 @@ public class Outlets extends Observable implements Observer {
 		listBill.add(new Bill(listbeverage, listFood));
 	}
 
-	public double getTotalTurnover() {
+	public void getTotalTurnover(Object[] src) {
 		double re = 0;
 		for (Bill bill : listBill) {
 			re += bill.getTotalBill();
 		}
-		return re;
+
+		if (((String) src[0]).equals("Thu nhap")) {
+			notify = new Object[3];
+			notify[0] = "Thu nhap";
+			notify[1] = id;
+			notify[2] = re;
+
+			this.setChanged();
+			this.notifyObservers(notify);
+		}
+	}
+
+	public void addFood(Object[] src) {
+		if (((String) src[0]).equals("Cap nhat mon an")) {
+			this.listFood = (List<Food>) src[1];
+		}
+	}
+
+	public void addBeverage(Object[] src) {
+		if (((String) src[0]).equals("Cap nhat do uong")) {
+			this.listBeverage = (List<Beverage>) src[1];
+		}
+	}
+
+	public void addEmployee(Employee employee) {
+		this.employees.add(employee);
+	}
+
+	public boolean removeEmployee(String id) {
+		for (Employee employee : employees) {
+			if (employee.equalsID(id)) {
+				employees.remove(employee);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(((String)arg).equals("Thu nhap")) {
-			this.setChanged();
-			this.notifyObservers("Thu nhap\t" + id + "\t" + this.getTotalTurnover());
-		}
+		Object[] src = (Object[]) arg;
+
+		getTotalTurnover(src);
 	}
 }

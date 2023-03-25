@@ -6,7 +6,6 @@ public class Cash implements PayOption {
 
 	@Override
 	public boolean getPay(Bill bill, double moneyReceived) {
-		// TODO Auto-generated method stub
-		return false;
+		return bill.getTotalBill() <= moneyReceived;
 	}
 }

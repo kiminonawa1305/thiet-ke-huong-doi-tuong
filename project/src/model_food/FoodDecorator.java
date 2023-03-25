@@ -9,4 +9,9 @@ public abstract class FoodDecorator implements Food {
 	}
 
 	public abstract double cost();
+	
+	@Override
+	public String toString() {
+		return this.note();
+	}
 }
