@@ -4,20 +4,26 @@ package model_food;
 public class Sausage extends FoodDecorator {
 	public Sausage(Food food) {
 		this.food = food;
+		this.name = "Xúc xích";
+		this.cost = 5000;
+	}
+
+	public Sausage() {
+		this.name = "Xúc xích";
+		this.cost = 10000;
 	}
 
 	public double cost() {
-		return 5000 + food.cost();
+		return this.cost + food.cost();
 	}
 
 	@Override
 	public String note() {
-		return food.note() + " thêm xúc xích,";
+		return food.note() + " thêm " + name;
 	}
 
 	@Override
 	public String getName() {
-		return "Xúc xích";
+		return name;
 	}
-
 }

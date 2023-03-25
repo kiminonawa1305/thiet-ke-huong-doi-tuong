@@ -4,31 +4,25 @@ import model_system.Size;
 
 //Phô mai
 public class Pizza extends Foods {
-	private Size size;
-	private String name;
-
 	public Pizza(String url) {
-		size = Size.MEDIUM;
-		name = "Bánh pizza size ";
 		this.urlImage = url;
+		name = "Bánh pizza size";
+		this.cost = 25000;
+	}
+	
+	public Pizza(Size size) {
+		this.size = size;
+		name = "Bánh pizza size";
+		this.cost = 25000;
 	}
 
 	public double cost() {
-		return 25000 * size.getPercent();
-	}
-
-	public Size getSize() {
-		return size;
-	}
-
-	public void setSize(Size size) {
-		this.size = size;
-		name += size.toString();
+		return this.cost * size.getPercent();
 	}
 
 	@Override
 	public String note() {
-		return name;
+		return name + " size " + size;
 	}
 
 	@Override

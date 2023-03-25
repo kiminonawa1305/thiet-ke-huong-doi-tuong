@@ -36,7 +36,7 @@ public class PanelDoAn extends JPanel {
 		panelInfCafe.setPreferredSize(new Dimension(10, 50));
 		this.add(panelInfCafe, BorderLayout.SOUTH);
 
-		JLabel labelTen = new JLabel("Tên: " + food.note());
+		JLabel labelTen = new JLabel("Tên: " + ((Foods)food).getName());
 		labelTen.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 		labelTen.setOpaque(true);
 		labelTen.setForeground(Color.white);
@@ -64,8 +64,8 @@ public class PanelDoAn extends JPanel {
 		this.add(image, BorderLayout.NORTH);
 
 		chon = new JButton("Chọn");
-		chon.setActionCommand(food.note());
-		chon.setName("chon");
+		chon.setActionCommand(((Foods)food).getName());
+		chon.setName("chonDoAn");
 		chon.setPreferredSize(new Dimension(195, 25));
 		this.add(chon, BorderLayout.EAST);
 	}

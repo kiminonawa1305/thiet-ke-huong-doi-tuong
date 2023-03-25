@@ -20,9 +20,9 @@ public class Bill {
 		this.listFood = listFood;
 	}
 
-	public Bill(String id) {
-		super();
-		this.id = id;
+	public Bill() {
+		listBeverage = new HashMap<>();
+		listFood = new HashMap<>();
 	}
 
 	public String getId() {
@@ -59,5 +59,13 @@ public class Bill {
 		}
 		
 		return totalBill;
+	}
+	
+	public void addFood(Food food, int amount) {
+		this.listFood.put(food, amount);
+	}
+	
+	public void addBeverage(Beverage beverage, int amount) {
+		this.listBeverage.put(beverage, amount);
 	}
 }

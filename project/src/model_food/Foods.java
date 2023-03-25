@@ -1,14 +1,13 @@
 package model_food;
 
-public abstract class Foods implements Food {
-	protected String urlImage;
+import model_system.Size;
 
-	@Override
-	public String note() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+public abstract class Foods implements Food {
+	protected String urlImage, name;
+	protected Size size = Size.MEDIUM;
+	protected double cost;
+
+
 	public abstract boolean hasSize();
 
 	public String getUrlImage() {
@@ -18,4 +17,35 @@ public abstract class Foods implements Food {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	@Override
+	public String toString() {
+		return this.note() + " giá là " + this.cost();
+	}
+	
+	
 }

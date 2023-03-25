@@ -1,16 +1,23 @@
 package model_beverage;
 
-public class Milk extends CondimentDecorator {
+public class Milk extends BeverageDecorator {
 	public Milk(Beverage beverage) {
-		super(beverage);
+		this.beverage = beverage;
+		this.cost = 2000;
+		this.name = "Sữa";
+	}
+	
+	public Milk() {
+		this.cost = 2000;
+		this.name = "Sữa";
 	}
 
 	public double cost() {
-		return 2000 + beverage.cost();
+		return cost + beverage.cost();
 	}
 
 	@Override
 	public String note() {
-		return beverage.note() + " thêm sửa,";
+		return beverage.note() + " thêm " + name;
 	}
 }

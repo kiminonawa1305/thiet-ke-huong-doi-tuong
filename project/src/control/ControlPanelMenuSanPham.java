@@ -11,7 +11,6 @@ public class ControlPanelMenuSanPham implements ActionListener {
 	private PanelMenuSanPham panelMenu;
 
 	public ControlPanelMenuSanPham(PanelMenuSanPham panelMenu) {
-		super();
 		this.panelMenu = panelMenu;
 	}
 
@@ -29,8 +28,24 @@ public class ControlPanelMenuSanPham implements ActionListener {
 			panelMenu.showMenuDoUong();
 		}
 		
-		if(button.getName().equals("chon")) {
+		if(button.getName().equals("chonDoAn")) {
 			panelMenu.chonDoAn(button);
+		}
+		
+		if(button.getName().equals("chonDoUong")) {
+			panelMenu.chonDoUong(button);
+		}
+		
+		if(button.getName().equals("datDoAn")) {
+			panelMenu.datDoAn();
+		}
+		
+		if(button.getName().equals("datDoUong")) {
+			panelMenu.datDoUong();
+		}
+		
+		if(button.equals(panelMenu.getButtonCancel())) {
+			panelMenu.huy();
 		}
 	}
 

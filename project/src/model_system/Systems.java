@@ -17,7 +17,7 @@ public class Systems extends Observable implements Observer {
 	private List<Beverage> listBeverage;
 	private List<Food> listFood;
 	private List<FoodDecorator> listToppingFood;
-	private List<CondimentDecorator> listToppingBeverage;
+	private List<BeverageDecorator> listToppingBeverage;
 	private Map<String, Double> listTurnover;
 	private Object[] notify;
 
@@ -49,7 +49,7 @@ public class Systems extends Observable implements Observer {
 		return listToppingFood;
 	}
 
-	public List<CondimentDecorator> getListToppingBeverage() {
+	public List<BeverageDecorator> getListToppingBeverage() {
 		return listToppingBeverage;
 	}
 
@@ -104,8 +104,8 @@ public class Systems extends Observable implements Observer {
 		this.notifyObservers(notify);
 	}
 	
-	public void addToppingBeverage(CondimentDecorator CondimentDecorator) {
-		this.listToppingBeverage.add(CondimentDecorator);
+	public void addToppingBeverage(BeverageDecorator BeverageDecorator) {
+		this.listToppingBeverage.add(BeverageDecorator);
 		notify = new Object[2];
 		notify[0] = "Cap nhat topping do uong";
 		notify[1] = this.listBeverage;

@@ -1,15 +1,14 @@
 package model_food;
 
 public class BanhMi extends Foods{
-	private String name;
-	
 	public BanhMi(String url) {
 		this.urlImage = url;
 		this.name = "Bánh mì";
+		this.cost = 10000;
 	}
 
 	public double cost() {
-		return 10000;
+		return this.cost;
 	}
 
 	@Override

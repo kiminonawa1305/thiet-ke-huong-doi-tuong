@@ -1,17 +1,29 @@
 package model_beverage;
 
-public class Sugar extends CondimentDecorator {
-	
+public class Sugar extends BeverageDecorator {
 	public Sugar(Beverage beverage) {
-		super(beverage);
+		this.beverage = beverage;
+		this.name = "Đường";
+		cost = 1000;
+	}
+	
+	
+	public Sugar() {
+		this.name = "Đường";
+		cost = 1000;
 	}
 
 	public double cost() {
-		return 1000 + beverage.cost();
+		return this.cost + beverage.cost();
 	}
 
 	@Override
 	public String note() {
-		return beverage.note() + " thêm đường,";
+		return beverage.note() + " thêm " + name;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 }

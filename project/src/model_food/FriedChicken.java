@@ -3,32 +3,25 @@ package model_food;
 import model_system.Size;
 
 public class FriedChicken extends Foods {
-	private String urlImage;
-	private Size size;
-	private String name;
-
 	public FriedChicken(String url) {
-		name = "Gà rán";
-		size = Size.MEDIUM;
 		this.urlImage = url;
+		name = "Gà rán";
+		this.cost = 25000;
 	}
-
-	public Size getSize() {
-		return size;
-	}
-
-	public void setSize(Size size) {
+	
+	public FriedChicken(Size size) {
 		this.size = size;
-		name += size.toString();
+		name = "Gà rán";
+		this.cost = 25000;
 	}
 
 	public double cost() {
-		return 25000 * size.getPercent();
+		return this.cost * size.getPercent();
 	}
 
 	@Override
 	public String note() {
-		return name;
+		return name + " size " + size;
 	}
 
 	@Override

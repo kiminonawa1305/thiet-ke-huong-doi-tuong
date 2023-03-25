@@ -23,10 +23,15 @@ import javax.swing.border.TitledBorder;
 
 import control.ControlViewOutlets;
 import model_beverage.Beverage;
+import model_beverage.BeverageDecorator;
+import model_beverage.OtherBeverage;
+import model_beverage.OtherToppingBeverage;
 import model_beverage.Soda;
 import model_food.Food;
+import model_food.FoodDecorator;
 import model_food.FriedChicken;
-import model_food.OrderFood;
+import model_food.OtherFood;
+import model_food.OtherToppingFood;
 import model_system.Date;
 import model_system.Employee;
 import model_system.Outlets;
@@ -47,29 +52,37 @@ public class DesignViewOutlets extends JFrame {
 	 */
 	public static void main(String[] args) {
 		List<Food> listFoods = new ArrayList<>();
-		for (int i = 1; i < 100; i++) {
-			if(i % 2 == 0) {
-				listFoods.add(new OrderFood("", "Tên món " + i, i*10000, true));
-			}else {
-				listFoods.add(new OrderFood("", "Tên món " + i, i*10000, false));
-			}
-		}
-
 		List<Beverage> listBeverages = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
-			listBeverages.add(new Soda(""));
-		}
-
 		List<Employee> emplyees = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
+		List<BeverageDecorator> listToppingBeverage = new ArrayList<>();
+		List<FoodDecorator> listToppingFood = new ArrayList<>();
+		
+		for (int i = 1; i <= 100; i++) {
+			if (i % 2 == 0) {
+				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, true));
+			} else {
+				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, false));
+			}
+			
 			emplyees.add(new Employee(i + "", "Ten " + i, new Date("13/05/2003"), "gioi tinh", "dia chi " + i,
 					"sdt " + i, i, new Date("25/3/2023")));
+			
+			listBeverages.add(new OtherBeverage("", "Tên món " + i, i * 10000));
 		}
+		
+		for (int i = 1; i <= 3; i++) {
+			listToppingBeverage.add(new OtherToppingBeverage("Topping " + i, i*1000));
+			
+			listToppingFood.add(new OtherToppingFood("Topping " + i, i*5000));
+		}
+		
 
 		Outlets outlets = new Outlets("a", "a", "abc", "lamnguyen1305");
 		outlets.setListBeverage(listBeverages);
 		outlets.setListFood(listFoods);
 		outlets.setEmployees(emplyees);
+		outlets.setListToppingFood(listToppingFood);
+		outlets.setListToppingBeverage(listToppingBeverage);
 		DesignViewOutlets frame = new DesignViewOutlets(outlets);
 	}
 
@@ -123,7 +136,7 @@ public class DesignViewOutlets extends JFrame {
 		SpringLayout sl_menuWest = new SpringLayout();
 		menuWest.setLayout(sl_menuWest);
 
-		Logo logo = new Logo("D:\\Tai_lieu_hoc_tap\\ThietKeHuongDoiTuong\\Code\\project\\logo.png");
+		Logo logo = new Logo("logo.png");
 		sl_menuWest.putConstraint(SpringLayout.NORTH, logo, 21, SpringLayout.NORTH, menuWest);
 		sl_menuWest.putConstraint(SpringLayout.WEST, logo, 22, SpringLayout.WEST, menuWest);
 		sl_menuWest.putConstraint(SpringLayout.SOUTH, logo, 170, SpringLayout.NORTH, menuWest);
@@ -177,6 +190,7 @@ public class DesignViewOutlets extends JFrame {
 		listButtonMainMenu.add(buttonDoanhThu);
 
 		panelCenter = new JPanel(new CardLayout(0, 0));
+		panelCenter.setPreferredSize(new Dimension(1540, 930));
 		panelCenter.setBackground(new Color(228, 239, 231));
 		contentPane.add(panelCenter, BorderLayout.CENTER);
 
@@ -235,9 +249,4 @@ public class DesignViewOutlets extends JFrame {
 			}
 		}
 	}
-
-	public void dac() {
-		new JFrame();
-	}
-
 }

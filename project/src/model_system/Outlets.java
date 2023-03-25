@@ -22,7 +22,7 @@ public class Outlets extends Observable implements Observer {
 	private List<Bill> listBill;
 	private List<Food> listFood;
 	private List<FoodDecorator> listToppingFood;
-	private List<CondimentDecorator> listToppingBeverage;
+	private List<BeverageDecorator> listToppingBeverage;
 	private List<Beverage> listBeverage;
 	private Object[] notify;
 
@@ -68,11 +68,11 @@ public class Outlets extends Observable implements Observer {
 		this.listToppingFood = listToppingFood;
 	}
 
-	public List<CondimentDecorator> getListToppingBeverage() {
+	public List<BeverageDecorator> getListToppingBeverage() {
 		return listToppingBeverage;
 	}
 
-	public void setListToppingBeverage(List<CondimentDecorator> listToppingBeverage) {
+	public void setListToppingBeverage(List<BeverageDecorator> listToppingBeverage) {
 		this.listToppingBeverage = listToppingBeverage;
 	}
 
@@ -143,7 +143,7 @@ public class Outlets extends Observable implements Observer {
 	
 	public void addToppingBeverage(Object[] src) {
 		if (((String) src[0]).equals("Cap nhat topping do uong")) {
-			this.listToppingBeverage = (List<CondimentDecorator>) src[1];
+			this.listToppingBeverage = (List<BeverageDecorator>) src[1];
 		}
 	}
 	

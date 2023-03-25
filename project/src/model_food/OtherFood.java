@@ -2,27 +2,22 @@ package model_food;
 
 import model_system.Size;
 
-public class OrderFood extends Foods {
-	private String name;
-	private double cost;
+public class OtherFood extends Foods {
 	private boolean hasSize = false;
-	private Size size;
 
-	public OrderFood(String url, String name, double cost, boolean hasSize) {
+	public OtherFood(String url, String name, double cost, boolean hasSize) {
 		super();
 		this.urlImage = url;
 		this.name = name;
 		this.cost = cost;
 		this.hasSize = hasSize;
-		size = Size.MEDIUM;
 	}
 	
-	public OrderFood(String url, String name, double cost) {
+	public OtherFood(String url, String name, double cost) {
 		super();
 		this.urlImage = url;
 		this.name = name;
 		this.cost = cost;
-		size = Size.MEDIUM;
 	}
 
 	@Override
@@ -36,7 +31,7 @@ public class OrderFood extends Foods {
 	}
 
 	public String note() {
-		return name;
+		return name + " size " + size;
 	}
 
 	public Size getSize() {

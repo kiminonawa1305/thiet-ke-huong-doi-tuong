@@ -19,6 +19,7 @@ import model_system.Size;
 
 public class PanelDoUong extends JPanel {
 	private Beverage beverage;
+	private JButton chon;
 
 	public PanelDoUong(Beverage beverage) {
 		this.beverage = beverage;
@@ -37,7 +38,7 @@ public class PanelDoUong extends JPanel {
 		panelInfCafe.setPreferredSize(new Dimension(10, 50));
 		this.add(panelInfCafe, BorderLayout.SOUTH);
 
-		JLabel labelTen = new JLabel("Tên: " + beverage.note());
+		JLabel labelTen = new JLabel("Tên: " + ((Beverages) beverage).getName());
 		labelTen.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 		labelTen.setOpaque(true);
 		labelTen.setForeground(Color.white);
@@ -60,12 +61,14 @@ public class PanelDoUong extends JPanel {
 		image.setIcon(new ImageIcon(((Beverages) beverage).getUrlImage()));
 		this.add(image, BorderLayout.NORTH);
 
-		JButton datHangCafe = new JButton("Chọn");
-		datHangCafe.setPreferredSize(new Dimension(100, 25));
-		this.add(datHangCafe, BorderLayout.EAST);
+		chon = new JButton("Chọn");
+		chon.setPreferredSize(new Dimension(195, 25));
+		chon.setName("chonDoUong");
+		chon.setActionCommand(((Beverages)beverage).getName());
+		this.add(chon, BorderLayout.EAST);
+	}
 
-		JButton themToppingCafe = new JButton("Thêm");
-		themToppingCafe.setPreferredSize(new Dimension(100, 25));
-		this.add(themToppingCafe, BorderLayout.WEST);
+	public JButton getChon() {
+		return chon;
 	}
 }
