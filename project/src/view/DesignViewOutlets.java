@@ -100,9 +100,9 @@ public class DesignViewOutlets extends JFrame {
 	 * 
 	 */
 	public void init() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width,
-				Toolkit.getDefaultToolkit().getScreenSize().height - 50);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setBounds(0, 0, 1740,
+				930);
 		contentPane = new JPanel(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setResizable(false);

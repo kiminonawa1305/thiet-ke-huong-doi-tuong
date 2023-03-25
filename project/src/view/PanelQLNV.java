@@ -23,13 +23,19 @@ import model_system.Employee;
 
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 
@@ -60,7 +66,6 @@ public class PanelQLNV extends JPanel {
 		this.event();
 //		this.add(that);
 	}
-	
 
 	public JButton getButtonEyes() {
 		return buttonEye;
@@ -116,6 +121,9 @@ public class PanelQLNV extends JPanel {
 
 		buttonDangNhap = new JButton("Đăng Nhập");
 		sl_panelPassword.putConstraint(SpringLayout.NORTH, buttonDangNhap, 17, SpringLayout.SOUTH, panelPasswordField);
+		sl_panelPassword.putConstraint(SpringLayout.WEST, buttonDangNhap, -835, SpringLayout.EAST, panelPassword);
+		sl_panelPassword.putConstraint(SpringLayout.SOUTH, buttonDangNhap, -404, SpringLayout.SOUTH, panelPassword);
+		sl_panelPassword.putConstraint(SpringLayout.EAST, buttonDangNhap, -546, SpringLayout.EAST, panelPassword);
 
 		buttonEye = new JButton("M");
 		buttonEye.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -123,9 +131,6 @@ public class PanelQLNV extends JPanel {
 		buttonEye.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonEye.setPreferredSize(new Dimension(50, 50));
 		panelPasswordField.add(buttonEye, BorderLayout.EAST);
-		sl_panelPassword.putConstraint(SpringLayout.WEST, buttonDangNhap, -837, SpringLayout.EAST, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.SOUTH, buttonDangNhap, -404, SpringLayout.SOUTH, panelPassword);
-		sl_panelPassword.putConstraint(SpringLayout.EAST, buttonDangNhap, -548, SpringLayout.EAST, panelPassword);
 		buttonDangNhap.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		panelPassword.add(buttonDangNhap);
 
@@ -261,7 +266,7 @@ public class PanelQLNV extends JPanel {
 		panelListNV.add(scrollPane, BorderLayout.CENTER);
 		createListNV();
 		scrollPane.setViewportView(panelShowListNV);
-		
+
 		JPanel panelThongTinNhanVien = new JPanel(new FlowLayout(FlowLayout.LEFT, 25, 0));
 		panelThongTinNhanVien.setBorder(
 				new TitledBorder(null, "Thông tin nhân viên", TitledBorder.CENTER, TitledBorder.TOP, null, null));
@@ -342,6 +347,14 @@ public class PanelQLNV extends JPanel {
 	public void event() {
 		this.buttonEye.addActionListener(control);
 		this.buttonDangNhap.addActionListener(control);
+		passwordField.registerKeyboardAction(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dangNhap();
+
+			}
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		this.buttonSearch.addActionListener(control);
 		this.buttonLuu.addActionListener(control);
 	}
@@ -451,14 +464,14 @@ public class PanelQLNV extends JPanel {
 			panelTuyChinh.add(buttonXoa);
 		}
 	}
-	
+
 	public void xoaNhanVien(JButton button) {
 		for (Employee employee : this.listEmployees) {
 			if (employee.equalsID(button.getActionCommand().split("	")[1])) {
 				this.listEmployees.remove(employee);
 			}
 		}
-		
+
 		createListNV();
 		scrollPane.setViewportView(panelShowListNV);
 	}
@@ -480,7 +493,7 @@ public class PanelQLNV extends JPanel {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(new JFrame(), "Lỗi sai kiểu dữ liệu", "Lỗi", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 		createListNV();
 		scrollPane.setViewportView(panelShowListNV);
 	}
@@ -493,7 +506,7 @@ public class PanelQLNV extends JPanel {
 			JOptionPane.showMessageDialog(new JFrame(), "Sai mật khẩu", "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void close() {
 		((CardLayout) this.getLayout()).show(this, "pass");
 	}
