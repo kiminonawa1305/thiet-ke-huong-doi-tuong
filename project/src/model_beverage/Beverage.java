@@ -7,4 +7,7 @@ public interface Beverage {
 	public double cost();
 	
 	public String note();
+
+	@Override
+	boolean equals(Object obj);
 }

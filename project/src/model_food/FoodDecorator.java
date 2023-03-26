@@ -1,5 +1,9 @@
 package model_food;
 
+import java.util.Objects;
+
+import model_beverage.BeverageDecorator;
+
 public abstract class FoodDecorator implements Food {
 	protected Food food;
 	protected String name;
@@ -33,5 +37,20 @@ public abstract class FoodDecorator implements Food {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cost, food, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || this.getClass() != obj.getClass()){
+			return false;
+		}
+		
+		FoodDecorator that = (FoodDecorator) obj;
+		return this.name.equals(that.name) && this.cost == that.cost && this.food.equals(that.food);
 	}
 }

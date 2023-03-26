@@ -50,10 +50,13 @@ public class Bill {
 	}
 
 	public double getTotalBill() {
+		totalBill = 0;
+		System.out.println(listFood);
 		for(Entry<Food, Integer> entryFood : listFood.entrySet()) {
 			totalBill += entryFood.getKey().cost() * entryFood.getValue();
 		}
 		
+		System.out.println(listBeverage);
 		for(Entry<Beverage, Integer> entryBeverage : listBeverage.entrySet()) {
 			totalBill += entryBeverage.getKey().cost() * entryBeverage.getValue();
 		}
@@ -62,10 +65,18 @@ public class Bill {
 	}
 	
 	public void addFood(Food food, int amount) {
-		this.listFood.put(food, amount);
+		if(this.listFood.containsKey(food)) {
+			this.listFood.put(food, this.listFood.get(food) + amount);
+		}else {
+			this.listFood.put(food, amount);
+		}
 	}
 	
 	public void addBeverage(Beverage beverage, int amount) {
-		this.listBeverage.put(beverage, amount);
+		if(this.listBeverage.containsKey(beverage)) {
+			this.listBeverage.put(beverage, this.listFood.get(beverage) + amount);
+		}else {
+			this.listBeverage.put(beverage, amount);
+		}
 	}
 }

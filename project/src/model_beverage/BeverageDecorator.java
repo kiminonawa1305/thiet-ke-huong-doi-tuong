@@ -1,5 +1,7 @@
 package model_beverage;
 
+import java.util.Objects;
+
 public abstract class BeverageDecorator implements Beverage {
 	protected Beverage beverage;
 	protected double cost;
@@ -35,5 +37,20 @@ public abstract class BeverageDecorator implements Beverage {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(beverage, cost, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || this.getClass() != obj.getClass()){
+			return false;
+		}
+		
+		BeverageDecorator that = (BeverageDecorator) obj;
+		return this.name.equals(that.name) && this.cost == that.cost && this.beverage.equals(that.beverage);
 	}
 }

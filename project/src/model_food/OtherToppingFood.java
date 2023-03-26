@@ -3,9 +3,6 @@ package model_food;
 import model_system.Size;
 
 public class OtherToppingFood extends FoodDecorator {
-	private String name;
-	private double cost;
-	
 	public OtherToppingFood(String name, double cost, Food food) {
 		this.name = name;
 		this.cost = cost;

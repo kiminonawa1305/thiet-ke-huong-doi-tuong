@@ -1,5 +1,7 @@
 package model_beverage;
 
+import java.util.Objects;
+
 import model_system.Size;
 
 public abstract class Beverages implements Beverage {
@@ -44,5 +46,18 @@ public abstract class Beverages implements Beverage {
 		return this.note() + " giá là " + this.cost();
 	}
 
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(cost, name, size, urlImage);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || this.getClass() != obj.getClass()) {
+			return false;
+		}
+
+		Beverages that = (Beverages) obj;
+		return this.name.equals(that.name) && this.size.equals(that.size) && this.cost == that.cost;
+	}
 }

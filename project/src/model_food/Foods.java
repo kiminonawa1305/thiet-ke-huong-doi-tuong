@@ -1,5 +1,8 @@
 package model_food;
 
+import java.util.Objects;
+
+import model_beverage.Beverages;
 import model_system.Size;
 
 public abstract class Foods implements Food {
@@ -43,8 +46,25 @@ public abstract class Foods implements Food {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || this.getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		Foods that = (Foods) obj;
+		System.out.println(this);
+		System.out.println(that);
+		return this.name.equals(that.name) && this.size.equals(that.size) && this.cost == that.cost;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(cost, name, size, urlImage);
+	}
+
+	@Override
 	public String toString() {
-		return this.note() + " giá là " + this.cost();
+		return this.note();
 	}
 	
 	

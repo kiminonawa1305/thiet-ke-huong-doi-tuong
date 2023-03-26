@@ -308,7 +308,7 @@ public class PanelMenuSanPham extends JPanel {
 			});
 
 			// Đặt giá trị mặc định cho JComboBox
-			comboBoxSize.setSelectedItem(options[1]);
+			comboBoxSize.setSelectedItem(options[0]);
 		}
 		contentPane.add(comboBoxSize);
 
@@ -342,7 +342,7 @@ public class PanelMenuSanPham extends JPanel {
 			}
 		}
 
-		bill.addBeverage(beverageOrder, (int) this.soLuong.getValue());
+		bill.addFood(foodOrder, (int) this.soLuong.getValue());
 		System.out.println(bill.getTotalBill());
 		foodOrder = null;
 		framechon.setVisible(false);
