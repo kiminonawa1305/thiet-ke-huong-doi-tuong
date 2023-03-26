@@ -40,6 +40,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
+import javax.swing.DefaultComboBoxModel;
 
 public class PanelQLNV extends JPanel {
 	private ControlPanelQLNV control;
@@ -59,6 +60,11 @@ public class PanelQLNV extends JPanel {
 			"icon\\open_eye_icon.png");
 	private final Icon CLOSE = new ImageIcon(
 			"icon\\eye_close_icon.png");
+	private final Icon EDIT = new ImageIcon(
+			"icon\\editIcon.png");
+	private final Icon DELETE = new ImageIcon(
+			"icon\\remove_02.png");
+	
 
 	/**
 	 * Create the panel.
@@ -101,7 +107,7 @@ public class PanelQLNV extends JPanel {
 		panelPassword.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JLabel labelPass = new JLabel("Nhập mật khẩu");
-		labelPass.setPreferredSize(new Dimension(1400, 400));
+		labelPass.setPreferredSize(new Dimension(1400, 300));
 		labelPass.setVerticalAlignment(SwingConstants.BOTTOM);
 		labelPass.setHorizontalAlignment(SwingConstants.CENTER);
 		labelPass.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -138,13 +144,13 @@ public class PanelQLNV extends JPanel {
 
 		JPanel panelFrameShowListNV = new JPanel(new BorderLayout());
 		panelFrameShowListNV.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		panelFrameShowListNV.setPreferredSize(new Dimension(1450, 550));
+		panelFrameShowListNV.setPreferredSize(new Dimension(1200, 550));
 		panelFrameShowListNV.setBackground(Color.ORANGE);
 		panelFrameShowListNV.setBorder(
 				new TitledBorder(null, "Danh sách nhân viên", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panelShowQLNV.add(panelFrameShowListNV);
 
-		JPanel panelSearch = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 1));
+		JPanel panelSearch = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
 		panelSearch.setBorder(new TitledBorder("Tìm kiếm"));
 		panelSearch.setPreferredSize(new Dimension(10, 75));
 		panelSearch.setBackground(Color.GRAY);
@@ -153,24 +159,24 @@ public class PanelQLNV extends JPanel {
 		FlowLayout fl_panelTextFieldSearch = new FlowLayout(FlowLayout.LEFT);
 		JPanel panelTextFieldSearch = new JPanel(fl_panelTextFieldSearch);
 		panelTextFieldSearch.setOpaque(false);
-		panelTextFieldSearch.setPreferredSize(new Dimension(1180, 45));
+		panelTextFieldSearch.setPreferredSize(new Dimension(950, 50));
 		panelSearch.add(panelTextFieldSearch);
 
 		textFieldSearchID = new JTextField();
 		textFieldSearchID.setBorder(new TitledBorder("ID nhân viên"));
-		textFieldSearchID.setPreferredSize(new Dimension(7, 35));
+		textFieldSearchID.setPreferredSize(new Dimension(7, 40));
 		textFieldSearchID.setColumns(20);
 		panelTextFieldSearch.add(textFieldSearchID);
 
 		textFieldSearchName = new JTextField();
 		textFieldSearchName.setBorder(new TitledBorder("Họ tên"));
-		textFieldSearchName.setPreferredSize(new Dimension(7, 35));
+		textFieldSearchName.setPreferredSize(new Dimension(7, 40));
 		panelTextFieldSearch.add(textFieldSearchName);
 		textFieldSearchName.setColumns(20);
 
 		textFieldSearchSDT = new JTextField();
 		textFieldSearchSDT.setBorder(new TitledBorder("Số điện thoại"));
-		textFieldSearchSDT.setPreferredSize(new Dimension(7, 35));
+		textFieldSearchSDT.setPreferredSize(new Dimension(7, 40));
 		textFieldSearchSDT.setColumns(20);
 		panelTextFieldSearch.add(textFieldSearchSDT);
 
@@ -178,7 +184,7 @@ public class PanelQLNV extends JPanel {
 		panelButtonSearch.setOpaque(false);
 		FlowLayout flowLayout_3 = (FlowLayout) panelButtonSearch.getLayout();
 		flowLayout_3.setHgap(10);
-		panelButtonSearch.setPreferredSize(new Dimension(200, 45));
+		panelButtonSearch.setPreferredSize(new Dimension(180, 50));
 		panelSearch.add(panelButtonSearch);
 
 		buttonSearch = new JButton("Tìm kiếm");
@@ -191,7 +197,7 @@ public class PanelQLNV extends JPanel {
 		JPanel panelListNV = new JPanel(new BorderLayout());
 		panelFrameShowListNV.add(panelListNV, BorderLayout.CENTER);
 
-		JPanel panelLaybel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 2));
+		JPanel panelLaybel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 2));
 		panelLaybel.setPreferredSize(new Dimension(10, 35));
 		panelLaybel.setBackground(new Color(6, 68, 32));
 		panelListNV.add(panelLaybel, BorderLayout.NORTH);
@@ -207,7 +213,7 @@ public class PanelQLNV extends JPanel {
 		labelTen.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTen.setFont(fontLabel);
 		labelTen.setForeground(Color.WHITE);
-		labelTen.setPreferredSize(new Dimension(200, 30));
+		labelTen.setPreferredSize(new Dimension(150, 30));
 		panelLaybel.add(labelTen);
 
 		JLabel labelNgaySinh = new JLabel("Ngày sinh");
@@ -228,7 +234,7 @@ public class PanelQLNV extends JPanel {
 		labelDiaChi.setHorizontalAlignment(SwingConstants.CENTER);
 		labelDiaChi.setFont(fontLabel);
 		labelDiaChi.setForeground(Color.WHITE);
-		labelDiaChi.setPreferredSize(new Dimension(200, 30));
+		labelDiaChi.setPreferredSize(new Dimension(180, 30));
 		panelLaybel.add(labelDiaChi);
 
 		JLabel labelSDT = new JLabel("Số điện thoại");
@@ -256,7 +262,7 @@ public class PanelQLNV extends JPanel {
 		labelTuyChinh.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTuyChinh.setFont(fontLabel);
 		labelTuyChinh.setForeground(Color.WHITE);
-		labelTuyChinh.setPreferredSize(new Dimension(200, 30));
+		labelTuyChinh.setPreferredSize(new Dimension(150, 30));
 		panelLaybel.add(labelTuyChinh);
 
 		scrollPane = new JScrollPane();
@@ -267,7 +273,7 @@ public class PanelQLNV extends JPanel {
 		JPanel panelThongTinNhanVien = new JPanel(new FlowLayout(FlowLayout.LEFT, 25, 0));
 		panelThongTinNhanVien.setBorder(
 				new TitledBorder(null, "Thông tin nhân viên", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panelThongTinNhanVien.setPreferredSize(new Dimension(1450, 130));
+		panelThongTinNhanVien.setPreferredSize(new Dimension(1200, 140));
 		panelThongTinNhanVien.setBackground(new Color(192, 192, 192));
 		panelShowQLNV.add(panelThongTinNhanVien);
 
@@ -277,60 +283,60 @@ public class PanelQLNV extends JPanel {
 		fl_panelLayThongTin.setVgap(8);
 		fl_panelLayThongTin.setHgap(25);
 		fl_panelLayThongTin.setAlignment(FlowLayout.LEFT);
-		panelLayThongTin.setPreferredSize(new Dimension(1200, 110));
+		panelLayThongTin.setPreferredSize(new Dimension(950, 130));
 		panelThongTinNhanVien.add(panelLayThongTin);
 
-		textFieldID = new JTextField(20);
-		textFieldID.setPreferredSize(new Dimension(250, 40));
+		textFieldID = new JTextField(15);
+		textFieldID.setPreferredSize(new Dimension(208, 45));
 		textFieldID.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldID.setBorder(new TitledBorder("ID nhân viên"));
 		panelLayThongTin.add(textFieldID);
 
-		textFieldHoTen = new JTextField(20);
-		textFieldHoTen.setPreferredSize(new Dimension(1500, 40));
+		textFieldHoTen = new JTextField(15);
+		textFieldHoTen.setPreferredSize(new Dimension(208, 45));
 		textFieldHoTen.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		textFieldHoTen.setBorder(new TitledBorder("Họ tên"));
+		textFieldHoTen.setBorder(new TitledBorder("ID nhân viên"));
 		panelLayThongTin.add(textFieldHoTen);
 
-		textFieldNgaySinh = new JTextField(20);
-		textFieldNgaySinh.setPreferredSize(new Dimension(1500, 40));
+		textFieldNgaySinh = new JTextField(15);
+		textFieldNgaySinh.setPreferredSize(new Dimension(208, 45));
 		textFieldNgaySinh.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldNgaySinh.setBorder(new TitledBorder("Ngày sinh"));
 		panelLayThongTin.add(textFieldNgaySinh);
 
 		comboBoxGioiTinh = new JComboBox<>();
+		comboBoxGioiTinh.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ", "Khác"}));
 		comboBoxGioiTinh.setBorder(new TitledBorder("Giới tính"));
-		comboBoxGioiTinh.setPreferredSize(new Dimension(271, 40));
+		comboBoxGioiTinh.setPreferredSize(new Dimension(208, 45));
 		panelLayThongTin.add(comboBoxGioiTinh);
 
-		textFieldDiaChi = new JTextField(20);
-		textFieldDiaChi.setPreferredSize(new Dimension(10, 40));
+		textFieldDiaChi = new JTextField(15);
+		textFieldDiaChi.setPreferredSize(new Dimension(208, 45));
 		textFieldDiaChi.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldDiaChi.setBorder(new TitledBorder("Địa chỉ"));
 		panelLayThongTin.add(textFieldDiaChi);
 
-		textFieldSDT = new JTextField(20);
-		textFieldSDT.setPreferredSize(new Dimension(10, 40));
+		textFieldSDT = new JTextField(15);
+		textFieldSDT.setPreferredSize(new Dimension(208, 45));
 		textFieldSDT.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldSDT.setBorder(new TitledBorder("Số điện thoại"));
 		panelLayThongTin.add(textFieldSDT);
 
-		textFieldLuongCoBan = new JTextField(20);
-		textFieldLuongCoBan.setPreferredSize(new Dimension(10, 40));
+		textFieldLuongCoBan = new JTextField(15);
+		textFieldLuongCoBan.setPreferredSize(new Dimension(208, 45));
 		textFieldLuongCoBan.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldLuongCoBan.setBorder(new TitledBorder("Lương cơ bản"));
 		panelLayThongTin.add(textFieldLuongCoBan);
 
-		textFieldNgayBD = new JTextField(20);
-		textFieldNgayBD.setPreferredSize(new Dimension(10, 40));
+		textFieldNgayBD = new JTextField(15);
+		textFieldNgayBD.setPreferredSize(new Dimension(208, 45));
 		textFieldNgayBD.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldNgayBD.setBorder(new TitledBorder("Ngày bắt đầu"));
 		panelLayThongTin.add(textFieldNgayBD);
 
-		String[] sex = { "Nam", "Nữ", "Khác" };
 		JPanel panelButton = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 25));
 		panelButton.setOpaque(false);
-		panelButton.setPreferredSize(new Dimension(160, 110));
+		panelButton.setPreferredSize(new Dimension(160, 130));
 		panelThongTinNhanVien.add(panelButton);
 
 		buttonLuu = new JButton("Lưu");
@@ -405,11 +411,11 @@ public class PanelQLNV extends JPanel {
 
 	public void createListNV() {
 		panelShowListNV = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 10));
-		panelShowListNV.setPreferredSize(new Dimension(1400, listEmployees.size() * 60));
+		panelShowListNV.setPreferredSize(new Dimension(1170, listEmployees.size() * 60));
 		for (Employee employee : this.listEmployees) {
-			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 14, 0));
+			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 			panel.setBackground(new Color(250, 241, 230));
-			panel.setPreferredSize(new Dimension(1430, 50));
+			panel.setPreferredSize(new Dimension(1180, 50));
 			panelShowListNV.add(panel);
 
 			JLabel lb1 = new JLabel(employee.getId());
@@ -421,7 +427,7 @@ public class PanelQLNV extends JPanel {
 			JLabel lb2 = new JLabel(employee.getName());
 			lb2.setHorizontalAlignment(SwingConstants.CENTER);
 			lb2.setFont(fontInf);
-			lb2.setPreferredSize(new Dimension(200, 48));
+			lb2.setPreferredSize(new Dimension(150, 48));
 			panel.add(lb2);
 
 			JLabel lb3 = new JLabel(employee.getBirthDate().toString());
@@ -439,7 +445,7 @@ public class PanelQLNV extends JPanel {
 			JLabel lb5 = new JLabel(employee.getAddress());
 			lb5.setHorizontalAlignment(SwingConstants.CENTER);
 			lb5.setFont(fontInf);
-			lb5.setPreferredSize(new Dimension(200, 48));
+			lb5.setPreferredSize(new Dimension(180, 48));
 			panel.add(lb5);
 
 			JLabel lb6 = new JLabel(employee.getNumberPhone());
@@ -462,17 +468,17 @@ public class PanelQLNV extends JPanel {
 
 			JPanel panelTuyChinh = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 2));
 			panelTuyChinh.setOpaque(false);
-			panelTuyChinh.setPreferredSize(new Dimension(200, 48));
+			panelTuyChinh.setPreferredSize(new Dimension(150, 48));
 			panelTuyChinh.setFont(fontLabel);
 			panelTuyChinh.setForeground(Color.WHITE);
 			panel.add(panelTuyChinh);
 
-			JButton buttonSua = new JButton();
+			JButton buttonSua = new JButton(EDIT);
 			buttonSua.setActionCommand("sua	" + employee.getId());
 			buttonSua.setPreferredSize(new Dimension(45, 45));
 			panelTuyChinh.add(buttonSua);
 
-			JButton buttonXoa = new JButton();
+			JButton buttonXoa = new JButton(DELETE);
 			buttonXoa.setActionCommand("xoa	" + employee.getId());
 			buttonXoa.setPreferredSize(new Dimension(45, 45));
 			panelTuyChinh.add(buttonXoa);
