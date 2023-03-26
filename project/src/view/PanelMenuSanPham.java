@@ -233,7 +233,7 @@ public class PanelMenuSanPham extends JPanel {
 	}
 
 	public void createPanelListFood(List<Food> listFoods) {
-		JPanel panelCenterDoAn = new JPanel(new FlowLayout(FlowLayout.LEFT, 45, 30));
+		JPanel panelCenterDoAn = new JPanel(new FlowLayout(FlowLayout.LEFT, 39, 30));
 		panelCenterDoAn.setPreferredSize(new Dimension(750, (listBeverages.size() / 6 + 1) * 280));
 		panelCenterDoAn.setBackground(new Color(228, 239, 231));
 		for (Food f : listFoods) {
@@ -246,7 +246,7 @@ public class PanelMenuSanPham extends JPanel {
 	}
 
 	public void createPanelListBeverage(List<Beverage> listBeverages) {
-		JPanel panelCenterDoUong = new JPanel(new FlowLayout(FlowLayout.LEFT, 45, 30));
+		JPanel panelCenterDoUong = new JPanel(new FlowLayout(FlowLayout.LEFT, 39, 30));
 		panelCenterDoUong.setPreferredSize(new Dimension(750, (listBeverages.size() / 6 + 1) * 200));
 		panelCenterDoUong.setBackground(new Color(228, 239, 231));
 		for (Beverage b : listBeverages) {

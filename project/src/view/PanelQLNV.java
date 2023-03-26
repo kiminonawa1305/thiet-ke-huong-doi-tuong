@@ -138,7 +138,7 @@ public class PanelQLNV extends JPanel {
 
 		JPanel panelFrameShowListNV = new JPanel(new BorderLayout());
 		panelFrameShowListNV.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		panelFrameShowListNV.setPreferredSize(new Dimension(1450, 650));
+		panelFrameShowListNV.setPreferredSize(new Dimension(1450, 550));
 		panelFrameShowListNV.setBackground(Color.ORANGE);
 		panelFrameShowListNV.setBorder(
 				new TitledBorder(null, "Danh sách nhân viên", TitledBorder.CENTER, TitledBorder.TOP, null, null));
@@ -267,7 +267,7 @@ public class PanelQLNV extends JPanel {
 		JPanel panelThongTinNhanVien = new JPanel(new FlowLayout(FlowLayout.LEFT, 25, 0));
 		panelThongTinNhanVien.setBorder(
 				new TitledBorder(null, "Thông tin nhân viên", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panelThongTinNhanVien.setPreferredSize(new Dimension(1450, 150));
+		panelThongTinNhanVien.setPreferredSize(new Dimension(1450, 130));
 		panelThongTinNhanVien.setBackground(new Color(192, 192, 192));
 		panelShowQLNV.add(panelThongTinNhanVien);
 

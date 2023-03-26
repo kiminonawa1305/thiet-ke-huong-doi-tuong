@@ -121,7 +121,7 @@ public class DesignViewOutlets extends JFrame {
 	 */
 	public void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1740, 930);
+		setBounds(0, 0, 1700, 800);
 		contentPane = new JPanel(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		this.setResizable(false);
@@ -190,7 +190,6 @@ public class DesignViewOutlets extends JFrame {
 		listButtonMainMenu.add(buttonDoanhThu);
 
 		panelCenter = new JPanel(new CardLayout(0, 0));
-		panelCenter.setPreferredSize(new Dimension(1540, 930));
 		panelCenter.setBackground(new Color(228, 239, 231));
 		contentPane.add(panelCenter, BorderLayout.CENTER);
 
@@ -206,6 +205,7 @@ public class DesignViewOutlets extends JFrame {
 
 		panelQLNV = new PanelQLNV(outlets.getEmployees(), outlets.getPass());
 		panelQLNV.setBackground(new Color(228, 239, 231));
+		this.setPreferredSize(new Dimension(1540, 930));
 		panelCenter.add("qlnv", panelQLNV);
 	}
 
