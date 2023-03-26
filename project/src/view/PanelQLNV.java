@@ -184,7 +184,7 @@ public class PanelQLNV extends JPanel {
 		panelButtonSearch.setOpaque(false);
 		FlowLayout flowLayout_3 = (FlowLayout) panelButtonSearch.getLayout();
 		flowLayout_3.setHgap(10);
-		panelButtonSearch.setPreferredSize(new Dimension(180, 50));
+		panelButtonSearch.setPreferredSize(new Dimension(190, 50));
 		panelSearch.add(panelButtonSearch);
 
 		buttonSearch = new JButton("Tìm kiếm");
@@ -286,19 +286,19 @@ public class PanelQLNV extends JPanel {
 		panelLayThongTin.setPreferredSize(new Dimension(950, 130));
 		panelThongTinNhanVien.add(panelLayThongTin);
 
-		textFieldID = new JTextField(15);
+		textFieldID = new JTextField(18);
 		textFieldID.setPreferredSize(new Dimension(208, 45));
 		textFieldID.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldID.setBorder(new TitledBorder("ID nhân viên"));
 		panelLayThongTin.add(textFieldID);
 
-		textFieldHoTen = new JTextField(15);
+		textFieldHoTen = new JTextField(18);
 		textFieldHoTen.setPreferredSize(new Dimension(208, 45));
 		textFieldHoTen.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldHoTen.setBorder(new TitledBorder("ID nhân viên"));
 		panelLayThongTin.add(textFieldHoTen);
 
-		textFieldNgaySinh = new JTextField(15);
+		textFieldNgaySinh = new JTextField(18);
 		textFieldNgaySinh.setPreferredSize(new Dimension(208, 45));
 		textFieldNgaySinh.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldNgaySinh.setBorder(new TitledBorder("Ngày sinh"));
@@ -310,25 +310,25 @@ public class PanelQLNV extends JPanel {
 		comboBoxGioiTinh.setPreferredSize(new Dimension(208, 45));
 		panelLayThongTin.add(comboBoxGioiTinh);
 
-		textFieldDiaChi = new JTextField(15);
+		textFieldDiaChi = new JTextField(18);
 		textFieldDiaChi.setPreferredSize(new Dimension(208, 45));
 		textFieldDiaChi.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldDiaChi.setBorder(new TitledBorder("Địa chỉ"));
 		panelLayThongTin.add(textFieldDiaChi);
 
-		textFieldSDT = new JTextField(15);
+		textFieldSDT = new JTextField(18);
 		textFieldSDT.setPreferredSize(new Dimension(208, 45));
 		textFieldSDT.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldSDT.setBorder(new TitledBorder("Số điện thoại"));
 		panelLayThongTin.add(textFieldSDT);
 
-		textFieldLuongCoBan = new JTextField(15);
+		textFieldLuongCoBan = new JTextField(18);
 		textFieldLuongCoBan.setPreferredSize(new Dimension(208, 45));
 		textFieldLuongCoBan.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldLuongCoBan.setBorder(new TitledBorder("Lương cơ bản"));
 		panelLayThongTin.add(textFieldLuongCoBan);
 
-		textFieldNgayBD = new JTextField(15);
+		textFieldNgayBD = new JTextField(18);
 		textFieldNgayBD.setPreferredSize(new Dimension(208, 45));
 		textFieldNgayBD.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldNgayBD.setBorder(new TitledBorder("Ngày bắt đầu"));
