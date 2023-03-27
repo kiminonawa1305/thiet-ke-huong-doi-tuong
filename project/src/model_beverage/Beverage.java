@@ -10,4 +10,9 @@ public interface Beverage {
 
 	@Override
 	boolean equals(Object obj);
+
+	Beverage clone();
+
+	@Override
+	int hashCode();
 }

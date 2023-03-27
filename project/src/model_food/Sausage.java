@@ -26,4 +26,9 @@ public class Sausage extends FoodDecorator {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public Food clone() {
+		return new Sausage();
+	}
 }

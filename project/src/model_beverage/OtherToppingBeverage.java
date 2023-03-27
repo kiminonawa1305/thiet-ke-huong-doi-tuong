@@ -20,6 +20,9 @@ public class OtherToppingBeverage extends BeverageDecorator {
 	public String toString() {
 		return this.note() + " giá là " + this.cost();
 	}
-	
-	
+
+	@Override
+	public Beverage clone() {
+		return new OtherToppingBeverage(this.name, this.cost);
+	}
 }

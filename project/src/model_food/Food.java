@@ -7,4 +7,9 @@ public interface Food {
 
 	@Override
 	boolean equals(Object obj);
+
+	public Food clone();
+
+	@Override
+	int hashCode();
 }

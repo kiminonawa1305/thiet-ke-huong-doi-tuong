@@ -28,4 +28,12 @@ public class Caffe extends Beverages {
 	public String toString() {
 		return this.note();
 	}
+	
+	@Override
+	public Beverage clone(){
+		Caffe re = new Caffe(this.urlImage);
+		re.setName(this.name);
+		re.setCost(this.cost);
+		return re;
+	}
 }

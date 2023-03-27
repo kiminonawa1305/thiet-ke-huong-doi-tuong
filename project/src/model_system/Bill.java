@@ -1,6 +1,8 @@
 package model_system;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import model_beverage.*;
@@ -18,11 +20,13 @@ public class Bill {
 		this.id = id;
 		this.listBeverage = listBeverage;
 		this.listFood = listFood;
+		totalBill = this.getTotalBill();
 	}
 
 	public Bill() {
 		listBeverage = new HashMap<>();
 		listFood = new HashMap<>();
+		totalBill = this.getTotalBill();
 	}
 
 	public String getId() {
@@ -51,16 +55,15 @@ public class Bill {
 
 	public double getTotalBill() {
 		totalBill = 0;
-		System.out.println(listFood);
 		for(Entry<Food, Integer> entryFood : listFood.entrySet()) {
 			totalBill += entryFood.getKey().cost() * entryFood.getValue();
 		}
 		
-		System.out.println(listBeverage);
 		for(Entry<Beverage, Integer> entryBeverage : listBeverage.entrySet()) {
 			totalBill += entryBeverage.getKey().cost() * entryBeverage.getValue();
 		}
 		
+		this.totalBill = totalBill;
 		return totalBill;
 	}
 	
@@ -74,9 +77,38 @@ public class Bill {
 	
 	public void addBeverage(Beverage beverage, int amount) {
 		if(this.listBeverage.containsKey(beverage)) {
-			this.listBeverage.put(beverage, this.listFood.get(beverage) + amount);
+			this.listBeverage.put(beverage, this.listBeverage.get(beverage) + amount);
 		}else {
 			this.listBeverage.put(beverage, amount);
 		}
+	}
+
+	@Override
+	public String toString() {
+		final int maxLen = 10;
+		return "Bill [id=" + id + ", listBeverage="
+				+ (listBeverage != null ? toString(listBeverage.entrySet(), maxLen) : null) + "\nlistFood="
+				+ (listFood != null ? toString(listFood.entrySet(), maxLen) : null) + "\ntotalBill=" + getTotalBill() + "]";
+	}
+
+	private String toString(Collection<?> collection, int maxLen) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[");
+		int i = 0;
+		for (Iterator<?> iterator = collection.iterator(); iterator.hasNext() && i < maxLen; i++) {
+			if (i > 0)
+				builder.append(", ");
+			builder.append(iterator.next());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	public int countSP() {
+		return this.listBeverage.size() + this.listFood.size();
+	}
+	
+	public double getPay(double thue) {
+		return this.getTotalBill() + this.getTotalBill()*thue;
 	}
 }

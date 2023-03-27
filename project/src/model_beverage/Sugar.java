@@ -26,4 +26,10 @@ public class Sugar extends BeverageDecorator {
 	public String getName() {
 		return name;
 	}
+
+
+	@Override
+	public Beverage clone() {
+		return new Sugar();
+	}
 }

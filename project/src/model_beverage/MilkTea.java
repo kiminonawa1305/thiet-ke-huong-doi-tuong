@@ -3,8 +3,6 @@ package model_beverage;
 import model_system.Size;
 
 public class MilkTea extends Beverages {
-	private Size size;
-
 	public MilkTea(String url) {
 		this.urlImage = url;
 		this.name =  "Trà sửa";
@@ -29,5 +27,13 @@ public class MilkTea extends Beverages {
 	@Override
 	public String toString() {
 		return this.note();
+	}
+
+	@Override
+	public Beverage clone() {
+		MilkTea re = new MilkTea(this.urlImage);
+		re.setName(this.name);
+		re.setCost(this.cost);
+		return re;
 	}
 }

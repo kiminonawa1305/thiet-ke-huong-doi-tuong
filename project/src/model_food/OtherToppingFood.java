@@ -39,10 +39,8 @@ public class OtherToppingFood extends FoodDecorator {
 		return this.note() + " giá là " + this.cost();
 	}
 
-	public static void main(String[] args) {
-		Food food = new OtherFood("", "", 15000, true);
-		((OtherFood)food).setSize(Size.SMALL);
-		food = new OtherToppingFood("Đường", 1300, food);
-		System.out.println(food.cost());
+	@Override
+	public Food clone() {
+		return new OtherToppingFood(name, cost);
 	}
 }

@@ -485,6 +485,7 @@ public class PanelQLNV extends JPanel {
 		}
 	}
 
+	//Xóa nhân viên
 	public void xoaNhanVien(JButton button) {
 		for (Employee employee : this.listEmployees) {
 			if (employee.equalsID(button.getActionCommand().split("	")[1])) {
@@ -496,6 +497,7 @@ public class PanelQLNV extends JPanel {
 		scrollPane.setViewportView(panelShowListNV);
 	}
 
+	//Sửa nhân viên
 	public void suaNhanVien() {
 //		for (Employee employee : this.listEmployees) {
 //			if (employee.equalsID(button.getActionCommand())) {
@@ -504,6 +506,7 @@ public class PanelQLNV extends JPanel {
 //		}
 	}
 
+	//Thêm nhân viên
 	public void themNhanVien() {
 		try {
 			this.listEmployees.add(new Employee(this.textFieldID.getText(), this.textFieldHoTen.getText(),

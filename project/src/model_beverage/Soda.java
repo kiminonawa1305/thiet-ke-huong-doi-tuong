@@ -23,4 +23,12 @@ public class Soda extends Beverages {
 	public String note() {
 		return name + " size " + size;
 	}
+
+	@Override
+	public Beverage clone() {
+		Soda re = new Soda(this.urlImage);
+		re.setName(this.name);
+		re.setCost(this.cost);
+		return re;
+	}
 }

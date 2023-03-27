@@ -25,4 +25,9 @@ public class Cheese extends FoodDecorator {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public Food clone() {
+		return new Cheese();
+	}
 }

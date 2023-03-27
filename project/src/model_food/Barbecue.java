@@ -27,4 +27,9 @@ public class Barbecue extends FoodDecorator {
 		return name;
 	}
 
+	@Override
+	public Food clone() {
+		return new Barbecue();
+	}
+
 }

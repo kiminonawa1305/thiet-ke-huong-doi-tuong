@@ -52,8 +52,6 @@ public abstract class Foods implements Food {
 		}
 		
 		Foods that = (Foods) obj;
-		System.out.println(this);
-		System.out.println(that);
 		return this.name.equals(that.name) && this.size.equals(that.size) && this.cost == that.cost;
 	}
 	
@@ -67,5 +65,5 @@ public abstract class Foods implements Food {
 		return this.note();
 	}
 	
-	
+	public abstract Food clone();
 }

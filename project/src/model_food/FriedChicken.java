@@ -33,4 +33,12 @@ public class FriedChicken extends Foods {
 	public boolean hasSize() {
 		return true;
 	}
+
+	@Override
+	public Food clone() {
+		FriedChicken re = new FriedChicken(urlImage);
+		re.setName(name);
+		re.setCost(cost);
+		return re;
+	}
 }

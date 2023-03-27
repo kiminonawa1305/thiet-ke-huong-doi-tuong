@@ -53,4 +53,7 @@ public abstract class BeverageDecorator implements Beverage {
 		BeverageDecorator that = (BeverageDecorator) obj;
 		return this.name.equals(that.name) && this.cost == that.cost && this.beverage.equals(that.beverage);
 	}
+
+	@Override
+	public abstract Beverage clone();
 }

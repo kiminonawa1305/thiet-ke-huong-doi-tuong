@@ -53,4 +53,6 @@ public abstract class FoodDecorator implements Food {
 		FoodDecorator that = (FoodDecorator) obj;
 		return this.name.equals(that.name) && this.cost == that.cost && this.food.equals(that.food);
 	}
+	
+	public abstract Food clone();
 }

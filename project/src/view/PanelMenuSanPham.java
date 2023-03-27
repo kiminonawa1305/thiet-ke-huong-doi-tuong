@@ -24,9 +24,12 @@ import control.ControlPanelMenuSanPham;
 import model_beverage.Beverage;
 import model_beverage.BeverageDecorator;
 import model_beverage.Beverages;
+import model_beverage.OtherBeverage;
 import model_food.Food;
 import model_food.FoodDecorator;
 import model_food.Foods;
+import model_food.OtherFood;
+import model_food.OtherToppingFood;
 import model_system.Bill;
 import model_system.Size;
 
@@ -143,6 +146,14 @@ public class PanelMenuSanPham extends JPanel {
 
 	public JSpinner getSoLuong() {
 		return soLuong;
+	}
+	
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
 	}
 
 	public void init() {
@@ -270,6 +281,7 @@ public class PanelMenuSanPham extends JPanel {
 		buttonOptionDoAn.setBackground(new Color(250, 241, 230));
 	}
 
+	//Chọn đồ ăn cơ bản.
 	public void chonDoAn(JButton button) {
 		if (!framechon.isVisible()) {
 			for (Food food : listFoods) {
@@ -282,7 +294,7 @@ public class PanelMenuSanPham extends JPanel {
 		}
 	}
 
-	// Show frame tiến hành chọn và đặt món.
+	// Show frame tiến hành chọn và đặt đồ ăn.
 	public void showTuyChinhDoAn(Food food) {
 		JPanel contentPane = new JPanel(new FlowLayout(FlowLayout.LEADING, 25, 15));
 
@@ -331,23 +343,27 @@ public class PanelMenuSanPham extends JPanel {
 		framechon.setVisible(true);
 	}
 
+	//Kiểm tra tùy chỉnh và chôt đặt món
 	public void datDoAn() {
-		((Foods) foodOrder).setSize((Size) this.comboBoxSize.getSelectedItem());
+		Food f = foodOrder.clone();
+		((Foods) f).setSize((Size) this.comboBoxSize.getSelectedItem());
 
 		if (!((String) this.comboBoxToppingFood.getSelectedItem()).equals("")) {
 			for (FoodDecorator decorator : listToppingFood) {
-				if (decorator.getName().equals((String) this.comboBoxToppingBeverage.getSelectedItem())) {
-					foodOrder = decorator.setFood(foodOrder);
+				if (decorator.getName().equals((String) this.comboBoxToppingFood.getSelectedItem())) {
+					Food dec = decorator.clone();
+					f = ((FoodDecorator)dec).setFood(f);
 				}
 			}
 		}
 
-		bill.addFood(foodOrder, (int) this.soLuong.getValue());
-		System.out.println(bill.getTotalBill());
-		foodOrder = null;
+		bill.addFood(f, (int) this.soLuong.getValue());
+		beverageOrder = null;
+		System.out.println(bill);
 		framechon.setVisible(false);
 	}
 
+	//Chọn đồ uống cơ bản
 	public void chonDoUong(JButton button) {
 		if (!framechon.isVisible()) {
 			for (Beverage beverage : listBeverages) {
@@ -360,7 +376,7 @@ public class PanelMenuSanPham extends JPanel {
 		}
 	}
 
-	// Show frame tiến hành chọn và đặt món.
+	// Show frame tiến hành chọn và đặt đồ uống.
 	public void showTuyChinhDoUong(Beverage beverage) {
 		JPanel contentPane = new JPanel(new FlowLayout(FlowLayout.LEADING, 25, 15));
 
@@ -391,20 +407,22 @@ public class PanelMenuSanPham extends JPanel {
 		framechon.setVisible(true);
 	}
 
+	//Kiểm tra tùy chọn và tiến hành chốt đặt món
 	public void datDoUong() {
-		((Beverages) beverageOrder).setSize((Size) this.comboBoxSize.getSelectedItem());
+		Beverage b = beverageOrder.clone();
+		((Beverages) b).setSize((Size) this.comboBoxSize.getSelectedItem());
 
 		if (!((String) this.comboBoxToppingBeverage.getSelectedItem()).equals("")) {
-			System.out.println("run");
 			for (BeverageDecorator decorator : listToppingBeverage) {
 				if (decorator.getName().equals((String) this.comboBoxToppingBeverage.getSelectedItem())) {
-					beverageOrder = decorator.setBeverage(beverageOrder);
+					Beverage dec = decorator.clone();
+					b = ((BeverageDecorator)dec).setBeverage(b);
 				}
 			}
 		}
 
-		bill.addBeverage(beverageOrder, (int) this.soLuong.getValue());
-		System.out.println(bill.getTotalBill());
+		bill.addBeverage(b, (int) this.soLuong.getValue());
+		System.out.println(bill);
 		beverageOrder = null;
 		framechon.setVisible(false);
 	}

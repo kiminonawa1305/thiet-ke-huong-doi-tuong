@@ -6,37 +6,34 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
 
 import control.ControlViewOutlets;
 import model_beverage.Beverage;
 import model_beverage.BeverageDecorator;
+import model_beverage.Caffe;
+import model_beverage.MilkTea;
 import model_beverage.OtherBeverage;
 import model_beverage.OtherToppingBeverage;
 import model_beverage.Soda;
+import model_beverage.Sugar;
+import model_food.BanhMi;
 import model_food.Food;
 import model_food.FoodDecorator;
 import model_food.FriedChicken;
 import model_food.OtherFood;
 import model_food.OtherToppingFood;
+import model_food.Pizza;
+import model_system.Bill;
 import model_system.Date;
 import model_system.Employee;
 import model_system.Outlets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class DesignViewOutlets extends JFrame {
 	private Outlets outlets;
@@ -56,26 +53,25 @@ public class DesignViewOutlets extends JFrame {
 		List<Employee> emplyees = new ArrayList<>();
 		List<BeverageDecorator> listToppingBeverage = new ArrayList<>();
 		List<FoodDecorator> listToppingFood = new ArrayList<>();
-		
+
 		for (int i = 1; i <= 100; i++) {
 			if (i % 2 == 0) {
 				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, true));
 			} else {
 				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, false));
 			}
-			
+
 			emplyees.add(new Employee(i + "", "Ten " + i, new Date("13/05/2003"), "gioi tinh", "dia chi " + i,
 					"sdt " + i, i, new Date("25/3/2023")));
-			
-			listBeverages.add(new OtherBeverage("", "Tên món " + i, i * 10000));
+
+			listBeverages.add(new OtherBeverage("", "Tên đồ uống " + i, i * 10000));
 		}
-		
+
 		for (int i = 1; i <= 3; i++) {
-			listToppingBeverage.add(new OtherToppingBeverage("Topping " + i, i*1000));
-			
-			listToppingFood.add(new OtherToppingFood("Topping " + i, i*5000));
+			listToppingBeverage.add(new OtherToppingBeverage("Topping đồ uống " + i, i * 1000));
+
+			listToppingFood.add(new OtherToppingFood("Topping đồ ăn " + i, i * 5000));
 		}
-		
 
 		Outlets outlets = new Outlets("a", "a", "abc", "lamnguyen1305");
 		outlets.setListBeverage(listBeverages);
@@ -128,34 +124,34 @@ public class DesignViewOutlets extends JFrame {
 
 		control = new ControlViewOutlets(this);
 
-		JPanel menuWest = new JPanel();
-		menuWest.setBackground(new Color(6, 68, 32));
-		menuWest.setPreferredSize(new Dimension(200, 10));
+		JPanel mainMenu = new JPanel();
+		mainMenu.setBackground(new Color(6, 68, 32));
+		mainMenu.setPreferredSize(new Dimension(200, 10));
 
-		contentPane.add(menuWest, BorderLayout.WEST);
-		SpringLayout sl_menuWest = new SpringLayout();
-		menuWest.setLayout(sl_menuWest);
+		contentPane.add(mainMenu, BorderLayout.WEST);
+		SpringLayout sl_mainMenu = new SpringLayout();
+		mainMenu.setLayout(sl_mainMenu);
 
 		Logo logo = new Logo("logo.png");
-		sl_menuWest.putConstraint(SpringLayout.NORTH, logo, 21, SpringLayout.NORTH, menuWest);
-		sl_menuWest.putConstraint(SpringLayout.WEST, logo, 22, SpringLayout.WEST, menuWest);
-		sl_menuWest.putConstraint(SpringLayout.SOUTH, logo, 170, SpringLayout.NORTH, menuWest);
-		sl_menuWest.putConstraint(SpringLayout.EAST, logo, -28, SpringLayout.EAST, menuWest);
+		sl_mainMenu.putConstraint(SpringLayout.NORTH, logo, 21, SpringLayout.NORTH, mainMenu);
+		sl_mainMenu.putConstraint(SpringLayout.WEST, logo, 22, SpringLayout.WEST, mainMenu);
+		sl_mainMenu.putConstraint(SpringLayout.SOUTH, logo, 170, SpringLayout.NORTH, mainMenu);
+		sl_mainMenu.putConstraint(SpringLayout.EAST, logo, -28, SpringLayout.EAST, mainMenu);
 		logo.setBackground(new Color(255, 255, 255));
 		logo.setPreferredSize(new Dimension(50, 50));
-		menuWest.add(logo);
+		mainMenu.add(logo);
 
 		JPanel menu = new JPanel();
-		sl_menuWest.putConstraint(SpringLayout.NORTH, menu, 32, SpringLayout.SOUTH, logo);
-		sl_menuWest.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, menuWest);
-		sl_menuWest.putConstraint(SpringLayout.SOUTH, menu, -125, SpringLayout.SOUTH, menuWest);
-		sl_menuWest.putConstraint(SpringLayout.EAST, menu, 0, SpringLayout.EAST, menuWest);
+		sl_mainMenu.putConstraint(SpringLayout.NORTH, menu, 32, SpringLayout.SOUTH, logo);
+		sl_mainMenu.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, mainMenu);
+		sl_mainMenu.putConstraint(SpringLayout.SOUTH, menu, -125, SpringLayout.SOUTH, mainMenu);
+		sl_mainMenu.putConstraint(SpringLayout.EAST, menu, 0, SpringLayout.EAST, mainMenu);
 		menu.setBackground(new Color(180, 231, 191));
 		FlowLayout fl_menu = (FlowLayout) menu.getLayout();
 		fl_menu.setVgap(0);
 		fl_menu.setHgap(0);
 		menu.setPreferredSize(new Dimension(150, 10));
-		menuWest.add(menu);
+		mainMenu.add(menu);
 
 		buttonMenu = new JButton("Menu");
 		buttonMenu.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -173,14 +169,6 @@ public class DesignViewOutlets extends JFrame {
 		menu.add(buttonHoaDon);
 		listButtonMainMenu.add(buttonHoaDon);
 
-		buttonQLNV = new JButton("Quản lý nhân viên");
-		buttonQLNV.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		buttonQLNV.setBackground(new Color(180, 231, 191));
-		buttonQLNV.setBorder(null);
-		buttonQLNV.setPreferredSize(new Dimension(200, 50));
-		menu.add(buttonQLNV);
-		listButtonMainMenu.add(buttonQLNV);
-
 		buttonDoanhThu = new JButton("Doanh thu");
 		buttonDoanhThu.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		buttonDoanhThu.setBackground(new Color(180, 231, 191));
@@ -189,17 +177,39 @@ public class DesignViewOutlets extends JFrame {
 		menu.add(buttonDoanhThu);
 		listButtonMainMenu.add(buttonDoanhThu);
 
+		buttonQLNV = new JButton("Quản lý nhân viên");
+		buttonQLNV.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		buttonQLNV.setBackground(new Color(180, 231, 191));
+		buttonQLNV.setBorder(null);
+		buttonQLNV.setPreferredSize(new Dimension(200, 50));
+		menu.add(buttonQLNV);
+		listButtonMainMenu.add(buttonQLNV);
+
 		panelCenter = new JPanel(new CardLayout(0, 0));
 		panelCenter.setBackground(new Color(228, 239, 231));
 		contentPane.add(panelCenter, BorderLayout.CENTER);
 
+		// Menu sản phẩm
 		panelMenuSanPham = new PanelMenuSanPham(outlets.getListFood(), outlets.getListBeverage(),
 				outlets.getListToppingFood(), outlets.getListToppingBeverage());
 		panelCenter.add("menu_sp", panelMenuSanPham);
 
-		JPanel panelHoaDon = new JPanel();
+		
+		//Bill test và sẽ xóa
+		Bill bill = new Bill();
+		bill.addFood(new FriedChicken(""), 3);
+		bill.addFood(new Pizza(""), 1);
+		bill.addFood(new BanhMi(""), 2);
+		
+		bill.addBeverage(new Sugar(new Soda("")), 1);
+		bill.addBeverage(new Caffe(""), 2);
+		bill.addBeverage(new MilkTea(""), 3);
+		
+		// Hóa đơn
+		PanelHoaDon panelHoaDon = new PanelHoaDon(bill);
 		panelCenter.add("hoa_don", panelHoaDon);
 
+		// Doanh thu
 		JPanel panelDoanhThu = new JPanel();
 		panelCenter.add("doanh_thu", panelDoanhThu);
 

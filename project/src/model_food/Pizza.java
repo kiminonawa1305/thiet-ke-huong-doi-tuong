@@ -35,4 +35,12 @@ public class Pizza extends Foods {
 		return true;
 	}
 
+	@Override
+	public Food clone() {
+		Pizza re = new Pizza(urlImage);
+		re.setName(name);
+		re.setCost(cost);
+		return re;
+	}
+
 }

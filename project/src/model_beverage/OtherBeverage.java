@@ -1,5 +1,7 @@
 package model_beverage;
 
+import javax.crypto.spec.OAEPParameterSpec;
+
 import model_system.Size;
 
 public class OtherBeverage extends Beverages {
@@ -28,5 +30,9 @@ public class OtherBeverage extends Beverages {
 	public String getName() {
 		return name;
 	}
-
+	
+	@Override
+	public Beverage clone(){
+		return new OtherBeverage(this.urlImage, this.name, this.cost);
+	}
 }

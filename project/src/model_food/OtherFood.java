@@ -47,4 +47,15 @@ public class OtherFood extends Foods {
 			this.size = size;
 		}
 	}
+	
+	public void setHasSize(boolean hasSize) {
+		this.hasSize = hasSize;
+	}
+
+	@Override
+	public Food clone() {
+		OtherFood re = new OtherFood(this.urlImage, this.name, this.cost);
+		re.setHasSize(hasSize);
+		return re;
+	}
 }

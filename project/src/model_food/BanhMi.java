@@ -25,5 +25,14 @@ public class BanhMi extends Foods{
 	public boolean hasSize() {
 		return false;
 	}
+
+	@Override
+	public Food clone() {
+		BanhMi re = new BanhMi(urlImage);
+		re.setName(name);
+		re.setCost(cost);
+		return re;
+	}
+	
 	
 }

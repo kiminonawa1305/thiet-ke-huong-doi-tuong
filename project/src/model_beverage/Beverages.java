@@ -60,4 +60,6 @@ public abstract class Beverages implements Beverage {
 		Beverages that = (Beverages) obj;
 		return this.name.equals(that.name) && this.size.equals(that.size) && this.cost == that.cost;
 	}
+	
+	public abstract Beverage clone();
 }

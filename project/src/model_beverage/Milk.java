@@ -20,4 +20,9 @@ public class Milk extends BeverageDecorator {
 	public String note() {
 		return beverage.note() + " thêm " + name;
 	}
+
+	@Override
+	public Beverage clone() {
+		return new Milk();
+	}
 }

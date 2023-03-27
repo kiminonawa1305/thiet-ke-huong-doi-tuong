@@ -100,8 +100,8 @@ public class Outlets extends Observable implements Observer {
 	 * 
 	 * @param payOption
 	 */
-	public boolean pay(PayOption payOption, Bill bill, double moneyReceived) {
-		return payOption.getPay(bill, moneyReceived);
+	public boolean pay(PayOption payOption, Bill bill,double thue, double moneyReceived) {
+		return payOption.getPay(bill, thue, moneyReceived);
 	}
 
 	/**
