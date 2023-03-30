@@ -1,0 +1,69 @@
+Triết học Mác Lênin	3
+Toán cao cấp A1	3
+Toán cao cấp A2	3
+Vật lý 2	2
+Giáo dục thể chất 1*	1
+Anh văn 1*	4
+Nhập môn tin học	3
+Lập trình cơ bản	4
+Kinh tế chính trị Mác- Lênin	2
+Quân sự 1 (lý thuyết)*	3
+Quân sự 2 (thực hành)*	3
+Toán cao cấp A3	3
+Giáo dục thể chất 2*	1
+Anh văn 2*	3
+Cấu trúc máy tính	2
+Nhập môn hệ điều hành	3
+Lập trình nâng cao	4
+Chủ nghĩa xã hội khoa học	2
+Xác suất thống kê	3
+Kỹ năng giao tiếp	2
+Pháp luật đại cương	2
+Marketing căn bản	2
+Mạng máy tính cơ bản	3
+Giao tiếp người _máy	3
+Toán rời rạc	3
+Cấu trúc dữ liệu	4
+Tư tưởng Hồ Chí Minh	2
+Hệ điều hành nâng cao	3
+Lý thuyết đồ thị	4
+Thiết kế hướng đối tượng	4
+Đồ họa máy tính	3
+Nhập môn cơ sở dữ liệu	4
+Lịch sử Đảng Cộng sản Việt Nam	2
+Lập trình mạng	4
+Mạng máy tính nâng cao	4
+Lập trình .NET	4
+Lập trình PHP	4
+Hệ quản trị cơ sở dữ liệu	3
+Lập trình Web	4
+Nhập môn trí tuệ nhân tạo	4
+Lập trình mạng nâng cao	4
+Lập trình trên thiết bị di động	3
+Nhập môn công nghệ phần mềm	4
+Lập trình Front End	4
+Phân tích và thiết kế hệ thống thông tin	4
+Hệ thống thông tin quản lý	3
+Máy học	4
+Thực tập lập trình Web	3
+Khởi nghiệp	3
+IoT	3
+An ninh mạng	3
+Thực tập lập trình trên thiết bị di động	3
+Đảm bảo chất lượng và kiểm thử phần mềm	4
+Quản lý dự án phần mềm	3
+An toàn và bảo mật hệ thống thông tin	3
+Hệ thống thông tin địa lý ứng dụng	3
+Data Mining	4
+Data Warehouse	3
+Quản trị mạng	3
+Giải pháp mạng cho doanh nghiệp	4
+Chuyên đề Java	4
+Xử lý ảnh và thị giác máy tính	4
+Chuyên đề WEB	4
+Chuyên đề mã nguồn mở	3
+Thương mại điện tử	3
+Phân tích dữ liệu lớn	4
+Đồ án Công nghệ phần mềm	2
+Khóa luận tốt nghiệp	12
+Tiểu luận tốt nghiệp	6

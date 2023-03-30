@@ -1,8 +1,8 @@
-package model_food;
+package model.food;
 
 import java.util.Objects;
 
-import model_beverage.BeverageDecorator;
+import model.beverage.BeverageDecorator;
 
 public abstract class FoodDecorator implements Food {
 	protected Food food;

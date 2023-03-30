@@ -11,11 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model_beverage.Beverage;
-import model_beverage.Beverages;
-import model_food.Food;
-import model_food.Foods;
-import model_system.Size;
+import model.beverage.Beverage;
+import model.beverage.Beverages;
+import model.food.Food;
+import model.food.Foods;
+import model.system.Size;
 
 public class PanelDoUong extends JPanel {
 	private Beverage beverage;

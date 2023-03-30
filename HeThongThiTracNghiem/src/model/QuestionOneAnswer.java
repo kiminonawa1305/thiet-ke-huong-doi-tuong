@@ -11,18 +11,22 @@ public class QuestionOneAnswer  implements OptionQuestion{
 		this.listAnswer = listAnswer;
 	}
 	
-	@Override
-	public boolean answer(Set<String> listAnswer) {
-		for(String key : listAnswer) {
-			if(!this.listAnswer.get(key)) {
-				return false;
-			}
-		}
-		
-		return true;
+	public QuestionOneAnswer() {
 	}
+	
+	
 
 	public Map<String, Boolean> getListAnswer() {
 		return listAnswer;
 	}
+
+	@Override
+	public boolean answer(Set<String> answers) {
+		if(answers.size() != 0 && answers.size() == 1){
+			return listAnswer.get(answers.toArray()[0]);
+		}
+		
+		return false;
+	}
 }
+

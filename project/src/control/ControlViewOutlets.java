@@ -23,6 +23,7 @@ public class ControlViewOutlets implements ActionListener {
 		}
 		
 		if (button.equals(viewOutlets.getButtonHoaDon())) {
+			viewOutlets.upDateHoaDon();
 			viewOutlets.showHoaDon();
 		}
 		

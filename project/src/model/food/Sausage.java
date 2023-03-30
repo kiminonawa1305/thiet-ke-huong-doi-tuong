@@ -1,4 +1,4 @@
-package model_food;
+package model.food;
 
 //Xúc xích
 public class Sausage extends FoodDecorator {

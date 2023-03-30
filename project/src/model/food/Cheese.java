@@ -1,4 +1,4 @@
-package model_food;
+package model.food;
 
 public class Cheese extends FoodDecorator {
 	public Cheese(Food food) {

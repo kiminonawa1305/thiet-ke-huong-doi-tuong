@@ -7,31 +7,36 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.text.NumberFormat;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import control.ControlPanelMenuSanPham;
-import model_beverage.Beverage;
-import model_beverage.BeverageDecorator;
-import model_beverage.Beverages;
-import model_beverage.OtherBeverage;
-import model_food.Food;
-import model_food.FoodDecorator;
-import model_food.Foods;
-import model_food.OtherFood;
-import model_food.OtherToppingFood;
-import model_system.Bill;
-import model_system.Size;
+import model.beverage.Beverage;
+import model.beverage.BeverageDecorator;
+import model.beverage.Beverages;
+import model.beverage.OtherBeverage;
+import model.food.Food;
+import model.food.FoodDecorator;
+import model.food.Foods;
+import model.food.OtherFood;
+import model.food.OtherToppingFood;
+import model.system.Bill;
+import model.system.NumericInputOnlyDocument;
+import model.system.Size;
 
 public class PanelMenuSanPham extends JPanel {
 	private JButton buttonOptionDoAn, buttonOptionDoUong;
@@ -44,7 +49,6 @@ public class PanelMenuSanPham extends JPanel {
 	private ControlPanelMenuSanPham control;
 	private JButton buttonOrder;
 	private JButton buttonCancel;
-	private JFrame framechon;
 	private Food foodOrder;
 	private Beverage beverageOrder;
 	private Size[] options;
@@ -112,10 +116,6 @@ public class PanelMenuSanPham extends JPanel {
 		return buttonCancel;
 	}
 
-	public JFrame getFramechon() {
-		return framechon;
-	}
-
 	public Food getFoodOrder() {
 		return foodOrder;
 	}
@@ -147,7 +147,7 @@ public class PanelMenuSanPham extends JPanel {
 	public JSpinner getSoLuong() {
 		return soLuong;
 	}
-	
+
 	public Bill getBill() {
 		return bill;
 	}
@@ -190,12 +190,6 @@ public class PanelMenuSanPham extends JPanel {
 		scrollPaneDoUong = new JScrollPane();
 		panelShowSanPham.add("beverage", scrollPaneDoUong);
 		createPanelListBeverage(listBeverages);
-
-		framechon = new JFrame();
-		framechon.setSize(800, 135);
-		framechon.setResizable(false);
-		framechon.setLocationRelativeTo(null);
-		framechon.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		buttonOrder = new JButton("Đặt");
 		buttonOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -281,15 +275,13 @@ public class PanelMenuSanPham extends JPanel {
 		buttonOptionDoAn.setBackground(new Color(250, 241, 230));
 	}
 
-	//Chọn đồ ăn cơ bản.
+	// Chọn đồ ăn cơ bản.
 	public void chonDoAn(JButton button) {
-		if (!framechon.isVisible()) {
-			for (Food food : listFoods) {
-				if (((Foods) food).getName().equals(button.getActionCommand())) {
-					this.showTuyChinhDoAn(food);
-					foodOrder = food;
-					return;
-				}
+		for (Food food : listFoods) {
+			if (((Foods) food).getName().equals(button.getActionCommand())) {
+				foodOrder = food;
+				this.showTuyChinhDoAn(food);
+				return;
 			}
 		}
 	}
@@ -329,21 +321,16 @@ public class PanelMenuSanPham extends JPanel {
 
 		contentPane.add(comboBoxToppingFood);
 
-		JPanel panelOptionOrder = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 3));
-		panelOptionOrder.setPreferredSize(new Dimension(150, 70));
-		contentPane.add(panelOptionOrder);
-
-		panelOptionOrder.add(buttonOrder);
-
-		panelOptionOrder.add(buttonCancel);
-
-		buttonOrder.setName("datDoAn");
-
-		framechon.setContentPane(contentPane);
-		framechon.setVisible(true);
+		int result = JOptionPane.showConfirmDialog(null, contentPane, "Title", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE);
+		if (result == JOptionPane.OK_OPTION) {
+			datDoAn();
+		} else {
+			huy();
+		}
 	}
 
-	//Kiểm tra tùy chỉnh và chôt đặt món
+	// Kiểm tra tùy chỉnh và chôt đặt món
 	public void datDoAn() {
 		Food f = foodOrder.clone();
 		((Foods) f).setSize((Size) this.comboBoxSize.getSelectedItem());
@@ -352,7 +339,7 @@ public class PanelMenuSanPham extends JPanel {
 			for (FoodDecorator decorator : listToppingFood) {
 				if (decorator.getName().equals((String) this.comboBoxToppingFood.getSelectedItem())) {
 					Food dec = decorator.clone();
-					f = ((FoodDecorator)dec).setFood(f);
+					f = ((FoodDecorator) dec).setFood(f);
 				}
 			}
 		}
@@ -360,18 +347,15 @@ public class PanelMenuSanPham extends JPanel {
 		bill.addFood(f, (int) this.soLuong.getValue());
 		beverageOrder = null;
 		System.out.println(bill);
-		framechon.setVisible(false);
 	}
 
-	//Chọn đồ uống cơ bản
+	// Chọn đồ uống cơ bản
 	public void chonDoUong(JButton button) {
-		if (!framechon.isVisible()) {
-			for (Beverage beverage : listBeverages) {
-				if (((Beverages) beverage).getName().equals(button.getActionCommand())) {
-					this.showTuyChinhDoUong(beverage);
-					beverageOrder = beverage;
-					return;
-				}
+		for (Beverage beverage : listBeverages) {
+			if (((Beverages) beverage).getName().equals(button.getActionCommand())) {
+				beverageOrder = beverage;
+				this.showTuyChinhDoUong(beverage);
+				return;
 			}
 		}
 	}
@@ -393,21 +377,16 @@ public class PanelMenuSanPham extends JPanel {
 
 		contentPane.add(comboBoxToppingBeverage);
 
-		JPanel panelOptionOrder = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 3));
-		panelOptionOrder.setPreferredSize(new Dimension(150, 70));
-		contentPane.add(panelOptionOrder);
-
-		panelOptionOrder.add(buttonOrder);
-
-		panelOptionOrder.add(buttonCancel);
-
-		buttonOrder.setName("datDoUong");
-
-		framechon.setContentPane(contentPane);
-		framechon.setVisible(true);
+		int result = JOptionPane.showConfirmDialog(null, contentPane, "Title", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE);
+		if (result == JOptionPane.OK_OPTION) {
+			datDoUong();
+		} else {
+			huy();
+		}
 	}
 
-	//Kiểm tra tùy chọn và tiến hành chốt đặt món
+	// Kiểm tra tùy chọn và tiến hành chốt đặt món
 	public void datDoUong() {
 		Beverage b = beverageOrder.clone();
 		((Beverages) b).setSize((Size) this.comboBoxSize.getSelectedItem());
@@ -416,7 +395,7 @@ public class PanelMenuSanPham extends JPanel {
 			for (BeverageDecorator decorator : listToppingBeverage) {
 				if (decorator.getName().equals((String) this.comboBoxToppingBeverage.getSelectedItem())) {
 					Beverage dec = decorator.clone();
-					b = ((BeverageDecorator)dec).setBeverage(b);
+					b = ((BeverageDecorator) dec).setBeverage(b);
 				}
 			}
 		}
@@ -424,12 +403,10 @@ public class PanelMenuSanPham extends JPanel {
 		bill.addBeverage(b, (int) this.soLuong.getValue());
 		System.out.println(bill);
 		beverageOrder = null;
-		framechon.setVisible(false);
 	}
 
 	public void huy() {
 		foodOrder = null;
 		beverageOrder = null;
-		framechon.setVisible(false);
 	}
 }

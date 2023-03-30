@@ -1,4 +1,4 @@
-package model_system;
+package model.system;
 
 public class Date {
 	private int day, month, year;

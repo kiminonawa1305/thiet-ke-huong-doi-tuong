@@ -1,4 +1,4 @@
-package model_system;
+package model.system;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,9 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.Consumer;
 
-import model_pay.PayOption;
-import model_beverage.*;
-import model_food.*;
+import model.beverage.*;
+import model.food.*;
+import model.pay.PayOption;
 
 @SuppressWarnings("deprecation")
 public class Outlets extends Observable implements Observer {
@@ -100,7 +100,7 @@ public class Outlets extends Observable implements Observer {
 	 * 
 	 * @param payOption
 	 */
-	public boolean pay(PayOption payOption, Bill bill,double thue, double moneyReceived) {
+	public static boolean pay(PayOption payOption, Bill bill,double thue, double moneyReceived) {
 		return payOption.getPay(bill, thue, moneyReceived);
 	}
 

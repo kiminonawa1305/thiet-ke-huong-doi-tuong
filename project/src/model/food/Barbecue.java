@@ -1,4 +1,4 @@
-package model_food;
+package model.food;
 
 //Thịt nướng
 public class Barbecue extends FoodDecorator {

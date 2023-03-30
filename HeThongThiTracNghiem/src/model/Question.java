@@ -8,6 +8,8 @@ public class Question {
 	private OptionQuestion optionQuestion;
 	private boolean[] listAnswer;
 	private int point;
+	private Set<String> answer;
+	
 	
 	public Question(String content, String topic, Level level, OptionQuestion optionQuestion) {
 		super();
@@ -17,8 +19,8 @@ public class Question {
 		this.optionQuestion = optionQuestion;
 	}
 
-	public boolean answer(Set<String> listAnswer) {
-		return optionQuestion.answer(listAnswer);
+	public boolean answer(Set<String> answers) {
+		return optionQuestion.answer(answers);
 	}
 
 	public String getContent() {
@@ -31,6 +33,13 @@ public class Question {
 
 	public Level getLevel() {
 		return level;
+	}
+	
+	public Set<String> getAnswer() {
+		return answer;
+	}
+	public void setAnswer(Set<String> answer) {
+		this.answer = answer;
 	}
 
 	public OptionQuestion getOptionQuestion() {
@@ -46,6 +55,6 @@ public class Question {
 				count++;
 			}
 		}
-		
 	}
+	
 }

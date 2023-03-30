@@ -1,9 +1,9 @@
-package model_food;
+package model.food;
 
 import java.util.Objects;
 
-import model_beverage.Beverages;
-import model_system.Size;
+import model.beverage.Beverages;
+import model.system.Size;
 
 public abstract class Foods implements Food {
 	protected String urlImage, name;

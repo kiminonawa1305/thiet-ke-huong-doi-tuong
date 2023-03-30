@@ -8,24 +8,50 @@ import java.awt.Font;
 import java.util.Map.Entry;
 import java.util.concurrent.Flow;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import model_beverage.Beverage;
-import model_food.Food;
-import model_system.Bill;
+import control.ControlPanelHoaDon;
+import model.beverage.Beverage;
+import model.food.Food;
+import model.pay.Card;
+import model.pay.Cash;
+import model.pay.Transfer;
+import model.system.Bill;
+import model.system.NumericInputOnlyDocument;
+import model.system.Outlets;
+
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 
 public class PanelHoaDon extends JPanel {
 	private Bill bill;
-	private JLabel labelTTHD;
 	private JPanel panelFrameListSP;
 	private JRadioButton optionTM, optionCK, optionQT;
 	private JScrollPane scrollPane;
+	private JLabel labelTTHD, labelTongTien, labelPhanTramThue, labelTienThue, labelThanhTienTT;
+	private ControlPanelHoaDon control;
+	private ButtonGroup groupOptionTT;
+	private JButton buttonThanhToan;
+	private JTable table;
+
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
 
 	/**
 	 * Create the panel.
@@ -35,17 +61,21 @@ public class PanelHoaDon extends JPanel {
 	public PanelHoaDon(Bill bill) {
 		this.bill = bill;
 		this.init();
+		this.upDateListSPDM();
+		this.event();
 	}
 
 	public void init() {
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 25));
+
+		control = new ControlPanelHoaDon(this);
 
 		JPanel panelMain = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 25));
 		panelMain.setPreferredSize(new Dimension(1200, 710));
 		panelMain.setBackground(Color.WHITE);
 		this.add(panelMain);
 
-		labelTTHD = new JLabel("<html>Thông tin hóa đơn<br> Mã hóa đơn: " + bill.getId() +"</html>");
+		labelTTHD = new JLabel("<html>Thông tin hóa đơn<br> Mã hóa đơn: " + bill.getId() + "</html>");
 		labelTTHD.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		labelTTHD.setPreferredSize(new Dimension(1100, 50));
 		panelMain.add(labelTTHD);
@@ -86,42 +116,7 @@ public class PanelHoaDon extends JPanel {
 
 		scrollPane = new JScrollPane();
 		panelFrameListSP.add(scrollPane, BorderLayout.CENTER);
-		createListSPDM();
-//		JPanel panelList = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
-//		panelList.setPreferredSize(new Dimension(1080, 60 * bill.countSP()));
-//		JPanel mon = new JPanel(new FlowLayout(FlowLayout.LEFT, 40, 3));
-//		mon.setPreferredSize(new Dimension(1095, 50));
-//		mon.setBackground(new Color(250, 241, 230));
-//		panelList.add(mon);
-//
-//		JLabel ten = new JLabel("Tên món");
-//		ten.setPreferredSize(new Dimension(320, 45));
-//		mon.add(ten);
-//
-//		JLabel sl = new JLabel(100 + "");
-//		sl.setHorizontalAlignment(SwingConstants.CENTER);
-//		sl.setPreferredSize(new Dimension(90, 45));
-//		mon.add(sl);
-//
-//		JLabel gia = new JLabel("500000");
-//		gia.setHorizontalAlignment(SwingConstants.CENTER);
-//		gia.setPreferredSize(new Dimension(330, 45));
-//		mon.add(gia);
-//
-//		JLabel thanhTien = new JLabel("5000000");
-//		thanhTien.setHorizontalAlignment(SwingConstants.CENTER);
-//		thanhTien.setPreferredSize(new Dimension(90, 45));
-//		mon.add(thanhTien);
-//
-//		JButton buttonHuy = new JButton("X");
-//		buttonHuy.setName("Đồ ăn");
-//		buttonHuy.setBackground(Color.RED);
-//		buttonHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
-//		buttonHuy.setPreferredSize(new Dimension(45, 45));
-//		mon.add(buttonHuy);
-//		scrollPane.setViewportView(panelList);
 
-		//
 		JPanel panelFrameThanhToan = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		panelFrameThanhToan.setBackground(new Color(228, 239, 231));
 		panelFrameThanhToan.setPreferredSize(new Dimension(1100, 150));
@@ -138,29 +133,38 @@ public class PanelHoaDon extends JPanel {
 		panelOptionTT.setBackground(Color.WHITE);
 		panelOptionTT.setPreferredSize(new Dimension(155, 85));
 
+		groupOptionTT = new ButtonGroup();
+
 		optionTM = new JRadioButton("Tiền mặt");
+		optionTM.setActionCommand("tien_mat");
 		optionTM.setPreferredSize(new Dimension(140, 25));
 		optionTM.setOpaque(false);
 		panelOptionTT.add(optionTM);
+		groupOptionTT.add(optionTM);
 
 		optionCK = new JRadioButton("Chuyển khoản");
+		optionCK.setActionCommand("chuyen_khoan");
 		optionCK.setPreferredSize(new Dimension(140, 22));
 		optionCK.setOpaque(false);
 		panelOptionTT.add(optionCK);
+		groupOptionTT.add(optionCK);
 
 		optionQT = new JRadioButton("Quẹt thẻ");
+		optionQT.setActionCommand("quet_the");
 		optionQT.setPreferredSize(new Dimension(140, 25));
 		optionQT.setOpaque(false);
 		panelOptionTT.add(optionQT);
-		
+		groupOptionTT.add(optionQT);
+
 		JPanel panelButtonThanhToan = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelButtonThanhToan.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelButtonThanhToan.setPreferredSize(new Dimension(700, 35));
 		panelButtonThanhToan.setOpaque(false);
 		panelTT.add(panelButtonThanhToan);
-		
-		JButton buttonThanhToan = new JButton("Thanh Toán");
+
+		buttonThanhToan = new JButton("Thanh Toán");
+		buttonThanhToan.setName("thanh_toan");
 		buttonThanhToan.setPreferredSize(new Dimension(150, 30));
 		buttonThanhToan.setForeground(Color.WHITE);
 		buttonThanhToan.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -171,36 +175,45 @@ public class PanelHoaDon extends JPanel {
 		panelTien.setBackground(Color.WHITE);
 		panelTien.setPreferredSize(new Dimension(240, 130));
 		panelFrameThanhToan.add(panelTien);
-		
-		JLabel labelTongTien = new JLabel("Tổng tiền: " + bill.getTotalBill());
+
+		labelTongTien = new JLabel("Tổng tiền: " + bill.getTotalBill());
 		labelTongTien.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		labelTongTien.setPreferredSize(new Dimension(200, 25));
 		panelTien.add(labelTongTien);
-		
-		JLabel labelPhanTramThue = new JLabel("Thuế : 0.05%");
+
+		labelPhanTramThue = new JLabel("Thuế : 0.05%");
 		labelPhanTramThue.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		labelPhanTramThue.setPreferredSize(new Dimension(200, 25));
 		panelTien.add(labelPhanTramThue);
-		
-		JLabel labelTienThue = new JLabel("Tiền thuế: " +  bill.getTotalBill()*0.05);
+
+		labelTienThue = new JLabel("Tiền thuế: " + bill.getTotalBill() * 0.05);
 		labelTienThue.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		labelTienThue.setPreferredSize(new Dimension(200, 25));
 		panelTien.add(labelTienThue);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setPreferredSize(new Dimension(160, 5));
 		panelTien.add(separator);
-		
-		JLabel labelThanhTienTT = new JLabel("ThanhTien: " + (bill.getTotalBill() + bill.getTotalBill()*0.05));
+
+		labelThanhTienTT = new JLabel("Thành tiền: " + (bill.getTotalBill() + bill.getTotalBill() * 0.05));
 		labelThanhTienTT.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		labelThanhTienTT.setPreferredSize(new Dimension(200, 25));
 		panelTien.add(labelThanhTienTT);
 	}
 
-	public void createListSPDM() {
+	public void event() {
+		buttonThanhToan.addActionListener(control);
+	}
+
+	/**
+	 * Đọc từ bill để lấy danh sách các món ăn cũng như là số lượng các món ăn để có
+	 * thể tạo ra danh sách các món ăn
+	 * 
+	 * @return
+	 */
+	public JPanel createListSPDM() {
 		JPanel panelList = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
 		panelList.setPreferredSize(new Dimension(1080, 60 * bill.countSP()));
-		
 
 		for (Entry entryFood : bill.getListFood().entrySet()) {
 			JPanel mon = new JPanel(new FlowLayout(FlowLayout.LEFT, 40, 3));
@@ -228,14 +241,15 @@ public class PanelHoaDon extends JPanel {
 			mon.add(thanhTien);
 
 			JButton buttonHuy = new JButton("X");
+			buttonHuy.addActionListener(control);
 			buttonHuy.setActionCommand(((Food) entryFood.getKey()).note());
-			buttonHuy.setName("Đồ ăn");
+			buttonHuy.setName("do_an");
 			buttonHuy.setBackground(Color.RED);
 			buttonHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
 			buttonHuy.setPreferredSize(new Dimension(45, 45));
 			mon.add(buttonHuy);
 		}
-		
+
 		for (Entry entryBeverage : bill.getListBeverage().entrySet()) {
 			JPanel mon = new JPanel(new FlowLayout(FlowLayout.LEFT, 40, 3));
 			mon.setPreferredSize(new Dimension(1095, 50));
@@ -256,25 +270,86 @@ public class PanelHoaDon extends JPanel {
 			gia.setPreferredSize(new Dimension(330, 45));
 			mon.add(gia);
 
-			JLabel thanhTien = new JLabel((((Beverage) entryBeverage.getKey()).cost() * (int) entryBeverage.getValue()) + "");
+			JLabel thanhTien = new JLabel(
+					(((Beverage) entryBeverage.getKey()).cost() * (int) entryBeverage.getValue()) + "");
 			thanhTien.setHorizontalAlignment(SwingConstants.CENTER);
 			thanhTien.setPreferredSize(new Dimension(90, 45));
 			mon.add(thanhTien);
 
 			JButton buttonHuy = new JButton("X");
 			buttonHuy.setActionCommand(((Beverage) entryBeverage.getKey()).note());
-			buttonHuy.setName("Đồ uống");
+			buttonHuy.setName("do_uong");
+			buttonHuy.addActionListener(control);
 			buttonHuy.setBackground(Color.RED);
 			buttonHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
 			buttonHuy.setPreferredSize(new Dimension(45, 45));
 			mon.add(buttonHuy);
 		}
-		
-		scrollPane.setViewportView(panelList);
-	}
-	
-	public void removeSP(JButton button) {
-		
+
+		return panelList;
 	}
 
+	// xóa 1 món trong hóa đơn.
+	public void removeSP(JButton button) {
+		if (button.getName().equals("do_an")) {
+			for (Food food : bill.getListFood().keySet()) {
+				if (food.note().equals(button.getActionCommand())) {
+					bill.getListFood().remove(food);
+				}
+			}
+		} else {
+			for (Beverage beverage : bill.getListBeverage().keySet()) {
+				if (beverage.note().equals(button.getActionCommand())) {
+					bill.getListBeverage().remove(beverage);
+				}
+			}
+		}
+
+		upDateListSPDM();
+	}
+
+	// Cập nhật lại danh sách
+	public void upDateListSPDM() {
+		this.scrollPane.setViewportView(createListSPDM());
+		this.labelTongTien.setText("Tổng tiền: " + bill.getTotalBill());
+		this.labelTienThue.setText("Tiền thuế: " + bill.getTotalBill() * 0.05);
+		this.labelThanhTienTT.setText("Thành tiền: " + (bill.getTotalBill() + bill.getTotalBill() * 0.05));
+	}
+
+	public void thanhToan() {
+		try {
+			if (groupOptionTT.getSelection() == null) {
+				JOptionPane.showMessageDialog(null, "Chưa chọn phương thức thanh toán", "Lỗi",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				JTextField textField = new JTextField(new NumericInputOnlyDocument(), null, 0);
+				int result = JOptionPane.showConfirmDialog(null, textField, "Nhập số tiền thanh toán:",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				String key = groupOptionTT.getSelection().getActionCommand();
+				boolean check = false;
+				switch (key) {
+				case "tien_mat": {
+					check = Outlets.pay(new Cash(), bill, 0.05, Double.parseDouble(textField.getText()));
+					break;
+				}
+				case "chuyen_khoan": {
+					check =  Outlets.pay(new Card(), bill, 0.05, Double.parseDouble(textField.getText()));
+					break;
+				}
+				case "quet_the": {
+					check =  Outlets.pay(new Transfer(), bill, 0.05, Double.parseDouble(textField.getText()));
+					break;
+				}
+				}
+				
+				if(check) {
+					bill = new Bill();
+				}else {
+					JOptionPane.showMessageDialog(this, "Lỗi thanh toán", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Lỗi thanh toán", "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }

@@ -15,25 +15,25 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import control.ControlViewOutlets;
-import model_beverage.Beverage;
-import model_beverage.BeverageDecorator;
-import model_beverage.Caffe;
-import model_beverage.MilkTea;
-import model_beverage.OtherBeverage;
-import model_beverage.OtherToppingBeverage;
-import model_beverage.Soda;
-import model_beverage.Sugar;
-import model_food.BanhMi;
-import model_food.Food;
-import model_food.FoodDecorator;
-import model_food.FriedChicken;
-import model_food.OtherFood;
-import model_food.OtherToppingFood;
-import model_food.Pizza;
-import model_system.Bill;
-import model_system.Date;
-import model_system.Employee;
-import model_system.Outlets;
+import model.beverage.Beverage;
+import model.beverage.BeverageDecorator;
+import model.beverage.Caffe;
+import model.beverage.MilkTea;
+import model.beverage.OtherBeverage;
+import model.beverage.OtherToppingBeverage;
+import model.beverage.Soda;
+import model.beverage.Sugar;
+import model.food.BanhMi;
+import model.food.Food;
+import model.food.FoodDecorator;
+import model.food.FriedChicken;
+import model.food.OtherFood;
+import model.food.OtherToppingFood;
+import model.food.Pizza;
+import model.system.Bill;
+import model.system.Date;
+import model.system.Employee;
+import model.system.Outlets;
 
 public class DesignViewOutlets extends JFrame {
 	private Outlets outlets;
@@ -43,44 +43,7 @@ public class DesignViewOutlets extends JFrame {
 	private List<JButton> listButtonMainMenu = new ArrayList<>();
 	private JButton buttonQLNV, buttonHoaDon, buttonDoanhThu, buttonMenu;
 	private ControlViewOutlets control;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		List<Food> listFoods = new ArrayList<>();
-		List<Beverage> listBeverages = new ArrayList<>();
-		List<Employee> emplyees = new ArrayList<>();
-		List<BeverageDecorator> listToppingBeverage = new ArrayList<>();
-		List<FoodDecorator> listToppingFood = new ArrayList<>();
-
-		for (int i = 1; i <= 100; i++) {
-			if (i % 2 == 0) {
-				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, true));
-			} else {
-				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, false));
-			}
-
-			emplyees.add(new Employee(i + "", "Ten " + i, new Date("13/05/2003"), "gioi tinh", "dia chi " + i,
-					"sdt " + i, i, new Date("25/3/2023")));
-
-			listBeverages.add(new OtherBeverage("", "Tên đồ uống " + i, i * 10000));
-		}
-
-		for (int i = 1; i <= 3; i++) {
-			listToppingBeverage.add(new OtherToppingBeverage("Topping đồ uống " + i, i * 1000));
-
-			listToppingFood.add(new OtherToppingFood("Topping đồ ăn " + i, i * 5000));
-		}
-
-		Outlets outlets = new Outlets("a", "a", "abc", "lamnguyen1305");
-		outlets.setListBeverage(listBeverages);
-		outlets.setListFood(listFoods);
-		outlets.setEmployees(emplyees);
-		outlets.setListToppingFood(listToppingFood);
-		outlets.setListToppingBeverage(listToppingBeverage);
-		DesignViewOutlets frame = new DesignViewOutlets(outlets);
-	}
+	private PanelHoaDon panelHoaDon;
 
 	/**
 	 * Create the frame.
@@ -194,19 +157,8 @@ public class DesignViewOutlets extends JFrame {
 				outlets.getListToppingFood(), outlets.getListToppingBeverage());
 		panelCenter.add("menu_sp", panelMenuSanPham);
 
-		
-		//Bill test và sẽ xóa
-		Bill bill = new Bill();
-		bill.addFood(new FriedChicken(""), 3);
-		bill.addFood(new Pizza(""), 1);
-		bill.addFood(new BanhMi(""), 2);
-		
-		bill.addBeverage(new Sugar(new Soda("")), 1);
-		bill.addBeverage(new Caffe(""), 2);
-		bill.addBeverage(new MilkTea(""), 3);
-		
 		// Hóa đơn
-		PanelHoaDon panelHoaDon = new PanelHoaDon(bill);
+		panelHoaDon = new PanelHoaDon(panelMenuSanPham.getBill());
 		panelCenter.add("hoa_don", panelHoaDon);
 
 		// Doanh thu
@@ -258,5 +210,47 @@ public class DesignViewOutlets extends JFrame {
 				b.setBackground(new Color(180, 231, 191));
 			}
 		}
+	}
+
+	public void upDateHoaDon() {
+		panelHoaDon.upDateListSPDM();
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		List<Food> listFoods = new ArrayList<>();
+		List<Beverage> listBeverages = new ArrayList<>();
+		List<Employee> emplyees = new ArrayList<>();
+		List<BeverageDecorator> listToppingBeverage = new ArrayList<>();
+		List<FoodDecorator> listToppingFood = new ArrayList<>();
+
+		for (int i = 1; i <= 100; i++) {
+			if (i % 2 == 0) {
+				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, true));
+			} else {
+				listFoods.add(new OtherFood("", "Tên món " + i, i * 10000, false));
+			}
+
+			emplyees.add(new Employee(i + "", "Ten " + i, new Date("13/05/2003"), "gioi tinh", "dia chi " + i,
+					"sdt " + i, i, new Date("25/3/2023")));
+
+			listBeverages.add(new OtherBeverage("", "Tên đồ uống " + i, i * 10000));
+		}
+
+		for (int i = 1; i <= 3; i++) {
+			listToppingBeverage.add(new OtherToppingBeverage("Topping đồ uống " + i, i * 1000));
+
+			listToppingFood.add(new OtherToppingFood("Topping đồ ăn " + i, i * 5000));
+		}
+
+		Outlets outlets = new Outlets("a", "a", "abc", "lamnguyen1305");
+		outlets.setListBeverage(listBeverages);
+		outlets.setListFood(listFoods);
+		outlets.setEmployees(emplyees);
+		outlets.setListToppingFood(listToppingFood);
+		outlets.setListToppingBeverage(listToppingBeverage);
+		DesignViewOutlets frame = new DesignViewOutlets(outlets);
 	}
 }

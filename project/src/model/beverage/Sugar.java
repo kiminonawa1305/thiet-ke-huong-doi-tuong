@@ -1,4 +1,4 @@
-package model_beverage;
+package model.beverage;
 
 public class Sugar extends BeverageDecorator {
 	public Sugar(Beverage beverage) {

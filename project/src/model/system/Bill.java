@@ -1,12 +1,12 @@
-package model_system;
+package model.system;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import model_beverage.*;
-import model_food.*;
+import model.beverage.*;
+import model.food.*;
 
 public class Bill {
 	private static int countID = 1;

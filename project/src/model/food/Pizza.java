@@ -1,6 +1,6 @@
-package model_food;
+package model.food;
 
-import model_system.Size;
+import model.system.Size;
 
 //Phô mai
 public class Pizza extends Foods {

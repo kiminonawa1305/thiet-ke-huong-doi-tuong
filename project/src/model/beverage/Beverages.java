@@ -1,8 +1,8 @@
-package model_beverage;
+package model.beverage;
 
 import java.util.Objects;
 
-import model_system.Size;
+import model.system.Size;
 
 public abstract class Beverages implements Beverage {
 	protected String urlImage, name;

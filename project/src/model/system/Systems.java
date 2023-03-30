@@ -1,4 +1,4 @@
-package model_system;
+package model.system;
 
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import model_beverage.*;
-import model_food.*;
+import model.beverage.*;
+import model.food.*;
 
 @SuppressWarnings("deprecation")
 public class Systems extends Observable implements Observer {

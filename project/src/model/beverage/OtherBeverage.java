@@ -1,8 +1,8 @@
-package model_beverage;
+package model.beverage;
 
 import javax.crypto.spec.OAEPParameterSpec;
 
-import model_system.Size;
+import model.system.Size;
 
 public class OtherBeverage extends Beverages {
 	public OtherBeverage(String url, String name, double cost) {

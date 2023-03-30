@@ -1,6 +1,6 @@
-package model_beverage;
+package model.beverage;
 
-import model_system.Size;
+import model.system.Size;
 
 public class MilkTea extends Beverages {
 	public MilkTea(String url) {

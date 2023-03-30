@@ -18,8 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import control.ControlPanelQLNV;
-import model_system.Date;
-import model_system.Employee;
+import model.system.Date;
+import model.system.Employee;
 
 import java.awt.Font;
 import java.awt.Toolkit;

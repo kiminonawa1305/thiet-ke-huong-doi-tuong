@@ -1,4 +1,4 @@
-package model_beverage;
+package model.beverage;
 
 public class OtherToppingBeverage extends BeverageDecorator {
 	public OtherToppingBeverage(String name, double cost) {

@@ -1,4 +1,4 @@
-package model_beverage;
+package model.beverage;
 
 public class Lemon extends BeverageDecorator {
 

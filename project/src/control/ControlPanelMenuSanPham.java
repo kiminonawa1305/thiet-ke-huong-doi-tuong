@@ -36,14 +36,6 @@ public class ControlPanelMenuSanPham implements ActionListener {
 			panelMenu.chonDoUong(button);
 		}
 		
-		if(button.getName().equals("datDoAn")) {
-			panelMenu.datDoAn();
-		}
-		
-		if(button.getName().equals("datDoUong")) {
-			panelMenu.datDoUong();
-		}
-		
 		if(button.equals(panelMenu.getButtonCancel())) {
 			panelMenu.huy();
 		}

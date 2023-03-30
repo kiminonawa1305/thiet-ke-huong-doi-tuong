@@ -11,9 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model_food.Food;
-import model_food.Foods;
-import model_system.Size;
+import model.food.Food;
+import model.food.Foods;
+import model.system.Size;
 
 public class PanelDoAn extends JPanel {
 	private Food food;

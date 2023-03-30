@@ -1,4 +1,4 @@
-package model_food;
+package model.food;
 
 public class BanhMi extends Foods{
 	public BanhMi(String url) {

@@ -1,4 +1,4 @@
-package model_food;
+package model.food;
 
 public interface Food {
 	public double cost();

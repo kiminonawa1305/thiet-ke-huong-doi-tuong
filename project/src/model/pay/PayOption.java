@@ -1,6 +1,6 @@
-package model_pay;
+package model.pay;
 
-import model_system.*;
+import model.system.*;
 
 public interface PayOption {
 
